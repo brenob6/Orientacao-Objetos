@@ -17,10 +17,11 @@ public class User implements CRUD<Album>{
     }
 
     @Override
-    public void read(Album object) {
+    public ArrayList<Album> read(Album object) {
         // TODO Auto-generated method stub
+        return albuns;
         
-    }
+    } 
 
     @Override
     public void update(Album object) {
@@ -37,6 +38,5 @@ public class User implements CRUD<Album>{
         // TODO Auto-generated method stub
         albuns.remove(object);
         
-    }
-
+    } 
 }
