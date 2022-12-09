@@ -1,9 +1,15 @@
 package br.unb.model;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class Album {
     
+    private int id;
+    private String name;
+    private String nickname;
+    private int total;
+    private ArrayList<Sticker> stickers;
+
     public int getId() {
         return id;
     }
@@ -25,11 +31,5 @@ public class Album {
     }
     public void setTotal(int total) {
         this.total = total;
-    }
-    private int id;
-    private String name;
-    private String nickname;
-    private int total;
-    private List<Sticker> stickers; 
-
+    } 
 }
