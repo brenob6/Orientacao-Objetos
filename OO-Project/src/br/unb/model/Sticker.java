@@ -57,6 +57,8 @@ public abstract class Sticker {
         UrlImage = urlImage;
     }
     
+    public Sticker() {}
+    
     public Sticker(String name, String raridade, int quant, String UrlImage) {
         this.name = name;
         this.raridade = raridade;
