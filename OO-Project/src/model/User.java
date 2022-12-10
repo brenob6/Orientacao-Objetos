@@ -1,16 +1,16 @@
-package br.unb.model;
+package model;
 
 import java.util.ArrayList;
 
 public class User {
-    private ArrayList<Album> albuns;
+    private static ArrayList<Album> albuns;
     
     public User() {
         this.albuns = new ArrayList<Album>();
     } 
     
-    public void addAlbum(Album album) {
-        this.albuns.add(album);
+    public static void addAlbum(Album album) {
+        albuns.add(album);
     }
     
     public void deleteAlbum(int id) {

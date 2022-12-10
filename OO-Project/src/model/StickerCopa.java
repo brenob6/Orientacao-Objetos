@@ -1,4 +1,4 @@
-package br.unb.model;
+package model;
 
 public class StickerCopa extends Sticker{
 

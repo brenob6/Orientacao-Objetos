@@ -1,4 +1,4 @@
-package br.unb.model;
+package model;
 
 import java.net.MalformedURLException;
 import java.net.URL;

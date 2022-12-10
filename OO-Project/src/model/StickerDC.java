@@ -1,4 +1,4 @@
-package br.unb.model;
+package model;
 
 public class StickerDC extends Sticker{
 
