@@ -10,12 +10,17 @@ public class StickerDC extends Sticker{
         // TODO Auto-generated constructor stub
     }
 
-    public StickerDC(String name, String raridade, int quant, String UrlImage,
-            String movie, String alias) {
-        super(name, raridade, quant, UrlImage);
+    public StickerDC(String name, String UrlImage, String movie, String alias) {
+        super(name, UrlImage);
         // TODO Auto-generated constructor stub
         this.movie = movie;
         this.alias = alias;
+    }
+    
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return this.alias + this.name + this.movie + this.quant + this.urlImage;
     }
 
     public String getMovie() {
@@ -31,5 +36,4 @@ public class StickerDC extends Sticker{
         this.alias = alias;
     }
 
-    
 }

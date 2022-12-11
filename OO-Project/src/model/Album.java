@@ -14,6 +14,10 @@ public class Album {
         return this.stickers;
     }
     
+    public void setStickers(ArrayList<Sticker> stickers) {
+        this.stickers = stickers;
+    }
+    
     public ArrayList<Sticker> getRepeatedStickers(){
         ArrayList<Sticker> repeated = new ArrayList<Sticker>();
         stickers.forEach((sticker) -> {
@@ -31,6 +35,12 @@ public class Album {
         });
         return missing;
         
+    }
+    
+    public Album(String name, String alias, ArrayList<Sticker> stickers) {
+        this.name = name;
+        this.alias = alias;
+        this.stickers = stickers;
     }
 
     public int getId() {

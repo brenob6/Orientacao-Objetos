@@ -28,7 +28,7 @@ public class StickerCopa extends Sticker{
 
     public StickerCopa(String name, String raridade, int quant, String UrlImage,
             String selecao, String posicao) {
-        super(name, raridade, quant, UrlImage);
+        super(name, UrlImage);
         // TODO Auto-generated constructor stub
         this.selecao = selecao;
         this.posicao = posicao;
