@@ -6,6 +6,11 @@ public class StickerCopa extends Sticker{
     private String posicao;
     
 
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return super.toString() + this.selecao + this.posicao;
+    }
     public String getSelecao() {
         return selecao;
     }
@@ -26,8 +31,7 @@ public class StickerCopa extends Sticker{
     }
 
 
-    public StickerCopa(String name, String raridade, int quant, String UrlImage,
-            String selecao, String posicao) {
+    public StickerCopa(String name, String UrlImage, String selecao, String posicao) {
         super(name, UrlImage);
         // TODO Auto-generated constructor stub
         this.selecao = selecao;
