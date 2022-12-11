@@ -1,16 +1,16 @@
 package model;
 
-public class StickerDC extends Sticker{
+public class DcSticker extends Sticker{
 
     private String movie;
     private String alias;
 
-    public StickerDC() {
+    public DcSticker() {
         super();
         // TODO Auto-generated constructor stub
     }
 
-    public StickerDC(String name, String UrlImage, String movie, String alias) {
+    public DcSticker(String name, String UrlImage, String movie, String alias) {
         super(name, UrlImage);
         // TODO Auto-generated constructor stub
         this.movie = movie;
@@ -20,7 +20,7 @@ public class StickerDC extends Sticker{
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return this.alias + this.name + this.movie + this.quant + this.urlImage;
+        return super.toString() + " movie: " + this.movie + " alias" + this.alias;
     }
 
     public String getMovie() {

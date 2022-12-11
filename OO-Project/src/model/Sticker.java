@@ -24,6 +24,12 @@ public abstract class Sticker {
         return new ImageIcon(url);
     }
     
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "name: " + this.name + " url: " + this.urlImage + " quantidade: " + this.quant;
+    }
+    
     public String getName() {
         return name;
     }

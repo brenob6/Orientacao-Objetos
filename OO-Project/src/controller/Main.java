@@ -2,9 +2,10 @@ package controller;
 
 import java.util.ArrayList;
 import model.Sticker;
-import model.StickerCopa;
-import model.StickerDC;
+import model.CupSticker;
+import model.DcSticker;
 import model.Album;
+import model.User;
 
 public class Main {
     public static void main(String args[]) {
@@ -32,7 +33,7 @@ public class Main {
         ArrayList<Sticker> stickerCopa = new ArrayList<Sticker>();
 
         for(int i = 0; i < 3; i++) {
-            Sticker sticker = new StickerDC(
+            Sticker sticker = new DcSticker(
                     name[i],
                     url[i],
                     alias[i],
@@ -45,7 +46,7 @@ public class Main {
         }
 
         for(int i = 0; i < 2; i++) {
-            Sticker sticker = new StickerCopa(
+            Sticker sticker = new CupSticker(
                     name1[i],
                     url1[i],
                     selecao[i],
@@ -56,12 +57,12 @@ public class Main {
         Album albumDc = new Album(0, "Herois DC", "Album do Evynhas", stickerDc); 
         Album albumCopa = new Album(1, "Copa", "Album do MC MK", stickerCopa);
 
-        UserController controller = new UserController();
-        controller.addAlbum(albumDc);
-        controller.addAlbum(albumCopa);
+        User user = new User();
+        user.addAlbum(albumDc);
+        user.addAlbum(albumCopa);
 
-       controller.listAll(); 
-       controller.getAlbuns().forEach(album -> {
+       user.listAll(); 
+       user.getAlbuns().forEach(album -> {
            album.getStickers().forEach(sticker -> System.out.println("Todas " + sticker.toString()));
            album.getRepeatedStickers().forEach(sticker -> System.out.println("Repetidas " + sticker.toString()));
            album.getMissingStickers().forEach(sticker -> System.out.println("Faltante " + sticker.toString()));

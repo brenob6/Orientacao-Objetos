@@ -1,6 +1,6 @@
 package model;
 
-public class StickerCopa extends Sticker{
+public class CupSticker extends Sticker{
 
     private String selecao;
     private String posicao;
@@ -9,7 +9,7 @@ public class StickerCopa extends Sticker{
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return super.toString() + this.selecao + this.posicao;
+        return super.toString() + " selecao " + this.selecao + " posicao " + this.posicao;
     }
     public String getSelecao() {
         return selecao;
@@ -31,7 +31,7 @@ public class StickerCopa extends Sticker{
     }
 
 
-    public StickerCopa(String name, String UrlImage, String selecao, String posicao) {
+    public CupSticker(String name, String UrlImage, String selecao, String posicao) {
         super(name, UrlImage);
         // TODO Auto-generated constructor stub
         this.selecao = selecao;
