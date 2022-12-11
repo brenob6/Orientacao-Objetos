@@ -7,7 +7,6 @@ public class Album {
     private int id;
     private String name;
     private String alias;
-    private int total;
     private ArrayList<Sticker> stickers;
     
     public ArrayList<Sticker> getStickers(){
@@ -44,6 +43,9 @@ public class Album {
         this.stickers = stickers;
     }
 
+    public int getTotal() {
+        return this.stickers.size();
+    }
     public int getId() {
         return this.id;
     }
@@ -59,10 +61,4 @@ public class Album {
     public void setAlias(String alias) {
         this.alias = alias;
     }
-    public int getTotal() {
-        return total;
-    }
-    public void setTotal(int total) {
-        this.total = total;
-    } 
 }

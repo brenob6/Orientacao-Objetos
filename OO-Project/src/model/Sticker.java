@@ -7,9 +7,9 @@ import javax.swing.ImageIcon;
 
 public abstract class Sticker {
 
-    protected int quant;
-    protected String urlImage;
-    protected String name;
+    private int quant;
+    private String urlImage;
+    private String name;
     
     public ImageIcon getImage() {
 
