@@ -6,25 +6,47 @@ public class Album {
     
     private int id;
     private String name;
-    private String nickname;
+    private String alias;
     private int total;
     private ArrayList<Sticker> stickers;
+    
+    public ArrayList<Sticker> getStickers(){
+        return this.stickers;
+    }
+    
+    public ArrayList<Sticker> getRepeatedStickers(){
+        ArrayList<Sticker> repeated = new ArrayList<Sticker>();
+        stickers.forEach((sticker) -> {
+            if(sticker.getQuant() > 1)
+                repeated.add(sticker);
+        });
+        return repeated;
+    }
+    
+    public ArrayList<Sticker> getMissingStickers() {
+        ArrayList<Sticker> missing = new ArrayList<Sticker>();
+        stickers.forEach((sticker) -> {
+            if(sticker.getQuant() == 0)
+                missing.add(sticker);
+        });
+        return missing;
+        
+    }
 
     public int getId() {
-        return id;
+        return this.id;
     }
-
     public String getName() {
         return name;
-    }
+    } 
     public void setName(String name) {
         this.name = name;
+    } 
+    public String getAlias() {
+        return this.alias;
     }
-    public String getNickname() {
-        return nickname;
-    }
-    public void setNickname(String apelido) {
-        this.nickname = apelido;
+    public void setAlias(String alias) {
+        this.alias = alias;
     }
     public int getTotal() {
         return total;
