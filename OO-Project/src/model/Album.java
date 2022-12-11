@@ -37,7 +37,8 @@ public class Album {
         
     }
     
-    public Album(String name, String alias, ArrayList<Sticker> stickers) {
+    public Album(int id, String name, String alias, ArrayList<Sticker> stickers) {
+        this.id = id;
         this.name = name;
         this.alias = alias;
         this.stickers = stickers;

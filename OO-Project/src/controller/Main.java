@@ -53,8 +53,8 @@ public class Main {
                     );
             stickerCopa.add(sticker);
         }
-        Album albumDc = new Album("Herois DC", "Album do Evynhas", stickerDc); 
-        Album albumCopa = new Album("Copa", "Album do MC MK", stickerCopa);
+        Album albumDc = new Album(0, "Herois DC", "Album do Evynhas", stickerDc); 
+        Album albumCopa = new Album(1, "Copa", "Album do MC MK", stickerCopa);
 
         UserController controller = new UserController();
         controller.addAlbum(albumDc);
