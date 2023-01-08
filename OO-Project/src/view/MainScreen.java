@@ -1,9 +1,9 @@
 package view;
 
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-
 
 import model.Album;
 
@@ -19,35 +19,49 @@ public class MainScreen extends JFrame {
       
     private final int WIDTH = 800;
     private final int HEIGHT = 600;
+    private final Font FONT = new Font("Arial", Font.BOLD, 20);
 
     private final String title = "Pseudo Album";
 
+    private JPanel albunsListPanel;
+    
     private ArrayList<JPanel> albunsPanel = new ArrayList<JPanel>();
 
     public MainScreen() {
+
+        albunsListPanel = new JPanel();
         
+        albunsListPanel.setBounds(0, 50, WIDTH, 500);
+        albunsListPanel.setLayout(new GridLayout(6, 1, 5, 5));
+
+        this.add(albunsListPanel);
+
         titlePanel(); 
         screenConfig();
     }
 
     private void titlePanel() {
+        JLabel label = new JLabel();
+        label.setText("Controle de Figurinhas");
+        label.setFont(FONT);
+
+        JButton button = new JButton();
+        button.setFont(FONT);
+        button.setText("+");
+
         JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Color.RED);
-        titlePanel.setBounds(0, 0, WIDTH, 100);
+        titlePanel.setBounds(0, 0, WIDTH, 50);
+        titlePanel.add(label);
+        titlePanel.add(button);
+
         this.add(titlePanel);
     }
 
     public void updateAlbumListPanel() {
-        JPanel panel = new JPanel();
-        panel.setBounds(0, 100, WIDTH, 700);
-        panel.setLayout(new GridLayout(9, 1, 10, 10));
-        panel.setBackground(Color.BLUE);
-
         albunsPanel.forEach((albumPanel) -> {
-            panel.add(albumPanel);
+            albunsListPanel.add(albumPanel);
         });
-
-        this.add(panel);
     }
 
     public void createAlbumCard(Album album) {
