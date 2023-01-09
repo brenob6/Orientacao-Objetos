@@ -25,9 +25,12 @@ public class MainScreen extends JFrame {
 
     private JPanel albunsListPanel;
     
-    private ArrayList<JPanel> albunsPanel = new ArrayList<JPanel>();
+    //private ArrayList<JPanel> albunsPanel = new ArrayList<JPanel>();
 
     public MainScreen() {
+
+        screenConfig();
+        titlePanel(); 
 
         albunsListPanel = new JPanel();
         
@@ -35,9 +38,6 @@ public class MainScreen extends JFrame {
         albunsListPanel.setLayout(new GridLayout(6, 1, 5, 5));
 
         this.add(albunsListPanel);
-
-        titlePanel(); 
-        screenConfig();
     }
 
     private void titlePanel() {
@@ -58,11 +58,11 @@ public class MainScreen extends JFrame {
         this.add(titlePanel);
     }
 
-    public void updateAlbumListPanel() {
-        albunsPanel.forEach((albumPanel) -> {
-            albunsListPanel.add(albumPanel);
-        });
-    }
+    //public void updateAlbumListPanel() {
+    //    albunsPanel.forEach((albumPanel) -> {
+    //        albunsListPanel.add(albumPanel);
+    //    });
+    //}
 
     public void createAlbumCard(Album album) {
         JPanel panel = new JPanel();
@@ -70,7 +70,7 @@ public class MainScreen extends JFrame {
         panel.setBackground(Color.GREEN);
         panel.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-                System.out.println(album.getAlias());
+                new StickerScreen();
             }
         });
 
@@ -80,9 +80,14 @@ public class MainScreen extends JFrame {
         label.setText(album.getName());
 
         panel.add(label);
-        albunsPanel.add(panel);
 
-        updateAlbumListPanel();
+        albunsListPanel.add(panel);
+       // albunsPanel.add(panel);
+
+        //updateAlbumListPanel();
+    }
+
+    public void removeAlbumCard(Album album) {
     }
 
     private void screenConfig() {
