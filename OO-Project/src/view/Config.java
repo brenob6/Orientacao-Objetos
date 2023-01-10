@@ -1,11 +1,17 @@
 package view;
 
 import java.awt.Font;
+import java.awt.Color;
 
 public interface Config {
-    int WIDTH = 800;
-    int HEIGHT = 600;
+    int FRAME_WIDTH = 800;
+    int FRAME_HEIGHT = 600;
 
-    Font FONT = new Font("arial", Font.BOLD, 20);
+    int TITLE_HEIGHT = 100;
 
+    Font FONT = new Font("monospaced", Font.BOLD, 30);
+
+    Color BACKGROUND_COLOR = new Color(0xCFFDE1);
+    Color COLOR_WHITE = new Color(0xE5E5CB);
+    Color COLOR_BLACK = new Color(0x1A120B);
 }
