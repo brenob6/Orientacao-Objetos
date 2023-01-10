@@ -1,12 +1,12 @@
 package view;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.border.Border;
 
@@ -31,41 +31,38 @@ public class StickerScreen extends JFrame implements Config{
 
     private JTabbedPane tabPane = new JTabbedPane();
 
+
     public StickerScreen(Album album) {
         this.setTitle("Pseudo Album");
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
-        this.setBackground(Config.BACKGROUND_COLOR);
         this.setLayout(new BorderLayout());
         this.setResizable(true);
 
         this.add(tabPane);
-        listStickesPanel.setBackground(Config.BACKGROUND_COLOR);
+        listStickesPanel.setAutoscrolls(true);
 
         titlePanel(album.getName());
 
         tabPane.add("TODAS", listStickesPanel);
         tabPane.add("FALTANTES", listMissingPanel);
         tabPane.add("REPETIDAS", listRepeatedPanel);
-
-        //scrollPane = new JScrollPane(
-        //    listStickesPanel,
-        //    JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-        //    JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED
-        //);
-
-        //this.add(scrollPane, BorderLayout.CENTER);
-
         loadStickerCards(album);
-        //this.add(listStickesPanel, BorderLayout.CENTER);
+
+        this.add(tabPane, BorderLayout.CENTER);
 
         this.setVisible(true);
     }
 
     private void titlePanel(String title) {
         topMenuPane.setSize(800, 100);
-        topMenuPane.setBackground(Config.TITLE_COLOR);
+        topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
+        JLabel label = new JLabel(title);
+        label.setFont(Config.FONT);
+        label.setForeground(Config.COLOR_WHITE);
+
+        topMenuPane.add(label);
         this.add(topMenuPane, BorderLayout.NORTH);
     }
 
@@ -87,20 +84,31 @@ public class StickerScreen extends JFrame implements Config{
 
         JPanel card = new JPanel();
         card.setPreferredSize(new Dimension(800, 80));
+        card.setBackground(Config.COLOR_WHITE);
     
         JLabel countLabel = new JLabel("0");
         countLabel.setFont(new Font("arial", Font.BOLD, 20));
 
         JButton addButton = new JButton("+");
+        addButton.setBorder(BorderFactory.createEmptyBorder());
         addButton.setPreferredSize(new Dimension(50, 50));
+        addButton.setForeground(Config.COLOR_WHITE);
+        addButton.setFont(Config.FONT);
+        addButton.setBackground(Config.COLOR_BLACK);
+
         JButton removeButton = new JButton("-");
+        removeButton.setBorder(BorderFactory.createEmptyBorder());
         removeButton.setPreferredSize(new Dimension(50, 50));
+        removeButton.setForeground(Config.COLOR_WHITE);
+        removeButton.setFont(Config.FONT);
+        removeButton.setBackground(Config.COLOR_BLACK);
     
-        JCheckBox checkBox = new JCheckBox(); 
-        checkBox.setPreferredSize(new Dimension(80, 80));
-    
+        JLabel nameLabel = new JLabel(); 
+        nameLabel.setFont(Config.FONT);
+        nameLabel.setText(sticker.getName());
+        nameLabel.setBackground(Config.COLOR_WHITE);
         
-        card.add(checkBox);
+        card.add(nameLabel);
         card.add(addButton);
         card.add(countLabel);
         card.add(removeButton);
