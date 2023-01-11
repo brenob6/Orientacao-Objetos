@@ -92,26 +92,11 @@ public class StickerScreen extends JFrame implements Config{
         JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
         countLabel.setFont(new Font("arial", Font.BOLD, 20));
 
-        JButton addButton = new JButton("+");
-        addButton.setBorder(BorderFactory.createEmptyBorder());
-        addButton.setPreferredSize(Config.buttonDimension);
-        addButton.setForeground(Config.COLOR_WHITE);
-        addButton.setFont(Config.FONT);
-        addButton.setBackground(Config.COLOR_BLACK);
+        JButton addButton = makeButton("+");
 
-        JButton removeButton = new JButton("-");
-        removeButton.setBorder(BorderFactory.createEmptyBorder());
-        removeButton.setPreferredSize(Config.buttonDimension);
-        removeButton.setForeground(Config.COLOR_WHITE);
-        removeButton.setFont(Config.FONT);
-        removeButton.setBackground(Config.COLOR_BLACK);
+        JButton removeButton = makeButton("-");
 
-        JButton infoButton = new JButton("i");
-        infoButton.setBorder(BorderFactory.createEmptyBorder());
-        infoButton.setPreferredSize(Config.buttonDimension);
-        infoButton.setForeground(Config.COLOR_WHITE);
-        infoButton.setFont(Config.FONT);
-        infoButton.setBackground(Config.COLOR_BLACK);
+        JButton infoButton = makeButton("i");
         infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -136,8 +121,13 @@ public class StickerScreen extends JFrame implements Config{
         return card;
     }
 
-    private JOptionPane showImage() {
-        JOptionPane pane = new JOptionPane();
-        return pane;
+    private JButton makeButton(String text) {
+        JButton button = new JButton(text);
+        button.setBorder(BorderFactory.createEmptyBorder());
+        button.setPreferredSize(Config.buttonDimension);
+        button.setForeground(Config.COLOR_WHITE);
+        button.setFont(Config.FONT);
+        button.setBackground(Config.COLOR_BLACK);
+        return button;
     }
 }
