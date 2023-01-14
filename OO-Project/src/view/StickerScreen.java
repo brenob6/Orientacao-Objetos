@@ -3,14 +3,11 @@ package view;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
-import javax.swing.border.Border;
-import javax.swing.text.LabelView;
 
 import model.Album;
 import model.Sticker;
@@ -18,11 +15,8 @@ import model.Sticker;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -86,26 +80,24 @@ public class StickerScreen extends JFrame implements Config{
     public JPanel makeStickerCard(Sticker sticker) {
 
         JPanel card = new JPanel();
-        card.setPreferredSize(new Dimension(800, 80));
+        card.setPreferredSize(Config.carDimension);
         card.setBackground(Config.COLOR_WHITE);
     
         JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
-        countLabel.setFont(new Font("arial", Font.BOLD, 20));
+        countLabel.setFont(Config.FONT);
 
         JButton addButton = makeButton("+");
-
         JButton removeButton = makeButton("-");
-
         JButton infoButton = makeButton("i");
+
         infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 JOptionPane.showMessageDialog(
-                    null, null, sticker.getName(), 1, sticker.getImage());
-
+                    //null, null, sticker.getName(), 1, sticker.getImage());
+                    null, makeInfoPanel(sticker), "Informações", JOptionPane.INFORMATION_MESSAGE);
             }
         });
-
     
         JLabel nameLabel = new JLabel(); 
         nameLabel.setFont(Config.FONT);
@@ -119,6 +111,25 @@ public class StickerScreen extends JFrame implements Config{
         card.add(infoButton);
 
         return card;
+    }
+
+    private JPanel makeInfoPanel(Sticker sticker) {
+        JPanel panel = new JPanel();
+        JLabel img = new JLabel(); 
+        img.setText(makeInfoText(sticker));
+        img.setIcon(sticker.getImage());
+        panel.add(img);
+        return panel;
+    }
+
+    private String makeInfoText(Sticker sticker) {
+        String[] infos = sticker.toString().split(";");
+        String text = "<html>";
+        for(int i = 0; i < infos.length; i++) {
+            text += infos[i] + "<br/>";
+        }
+        text += "</html>";
+        return text;
     }
 
     private JButton makeButton(String text) {
