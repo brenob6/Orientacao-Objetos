@@ -2,7 +2,6 @@ package model;
 
 import java.util.ArrayList;
 
-import model.Album;
 
 public class User {
 

@@ -20,7 +20,7 @@ public class DcSticker extends Sticker{
     @Override
     public String toString() {
         // TODO Auto-generated method stub
-        return super.toString() + " movie: " + this.movie + " alias" + this.alias;
+        return super.toString() + ";movie: " + this.movie + ";alias" + this.alias;
     }
 
     public String getMovie() {

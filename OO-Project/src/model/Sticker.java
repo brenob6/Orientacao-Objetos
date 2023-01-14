@@ -11,25 +11,15 @@ public abstract class Sticker {
     private String urlImage;
     private String name;
     
-    public ImageIcon getImage() {
+    
+    public Sticker() {}
+    
+    public Sticker(String name, String UrlImage) {
+        this.name = name;
+        this.quant = 0; 
+        this.urlImage = UrlImage;
+    }
 
-        URL url = null; 
-        try {
-            url = new URL(urlImage);
-        } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-        
-        return new ImageIcon(url);
-    }
-    
-    @Override
-    public String toString() {
-        // TODO Auto-generated method stub
-        return "name: " + this.name + " url: " + this.urlImage + " quantidade: " + this.quant;
-    }
-    
     public String getName() {
         return name;
     }
@@ -53,13 +43,25 @@ public abstract class Sticker {
     public void setUrlImage(String urlImage) {
         this.urlImage = urlImage;
     }
-    
-    public Sticker() {}
-    
-    public Sticker(String name, String UrlImage) {
-        this.name = name;
-        this.quant = 0; 
-        this.urlImage = UrlImage;
+
+    @Override
+    public String toString() {
+        // TODO Auto-generated method stub
+        return "name: " + this.name +
+        ";quantidade: " + this.quant;
+    }
+
+    public ImageIcon getImage() {
+
+        URL url = null; 
+        try {
+            url = new URL(urlImage);
+        } catch (MalformedURLException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        
+        return new ImageIcon(url);
     }
 
 }
