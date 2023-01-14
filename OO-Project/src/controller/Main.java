@@ -1,23 +1,25 @@
 package controller;
 
 import java.util.ArrayList;
+
 import model.Sticker;
 import model.CupSticker;
 import model.DcSticker;
 import model.Album;
 import model.User;
+import view.MainScreen;
 
 public class Main {
     public static void main(String args[]) {
-        
+        MainScreen mainScreen = new MainScreen();    
         // Dados Figuras DC
         String[] movie = {"Cavaleiro das Trevas", "Flash Point", "Homem de Aço"};
         String[] alias = {"Batman", "Flash", "Superman"};
         String[] name = {"Bruce Wayne", "Barry Alen", "Kent Clark"};
         String[] url = {
                 "https://upload.wikimedia.org/wikipedia/pt/8/8d/Batman_por_Jim_Lee.jpg",
-				"https://upload.wikimedia.org/wikipedia/pt/a/a4/Barry_Allen_Flash.jpg",
-				"https://upload.wikimedia.org/wikipedia/pt/thumb/b/be/Super-Homem.jpg/250px-Super-Homem.jpg"
+    			"https://upload.wikimedia.org/wikipedia/pt/a/a4/Barry_Allen_Flash.jpg",
+    			"https://upload.wikimedia.org/wikipedia/pt/thumb/b/be/Super-Homem.jpg/250px-Super-Homem.jpg"
         };
         
         // Dados Figura Copa
@@ -31,7 +33,7 @@ public class Main {
         
         ArrayList<Sticker> stickerDc = new ArrayList<Sticker>();
         ArrayList<Sticker> stickerCopa = new ArrayList<Sticker>();
-
+ 
         for(int i = 0; i < 3; i++) {
             Sticker sticker = new DcSticker(
                     name[i],
@@ -44,7 +46,7 @@ public class Main {
             stickerDc.add(sticker);
             
         }
-
+ 
         for(int i = 0; i < 2; i++) {
             Sticker sticker = new CupSticker(
                     name1[i],
@@ -56,19 +58,14 @@ public class Main {
         }
         Album albumDc = new Album(0, "Herois DC", "Album do Evynhas", stickerDc); 
         Album albumCopa = new Album(1, "Copa", "Album do MC MK", stickerCopa);
-
+ 
         User user = new User();
         user.addAlbum(albumDc);
         user.addAlbum(albumCopa);
 
-       user.listAll(); 
-       user.getAlbuns().forEach(album -> {
-           album.getStickers().forEach(sticker -> System.out.println("Todas " + sticker.toString()));
-           album.getRepeatedStickers().forEach(sticker -> System.out.println("Repetidas " + sticker.toString()));
-           album.getMissingStickers().forEach(sticker -> System.out.println("Faltante " + sticker.toString()));
-       });
-        
-        
+        user.getAlbuns().forEach(albuns -> {
+            mainScreen.makeAlbumCard(albuns);
+        });
     }
 
 }
