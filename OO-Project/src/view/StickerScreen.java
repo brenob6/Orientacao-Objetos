@@ -7,6 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 
 import model.Album;
@@ -36,7 +37,7 @@ public class StickerScreen extends JFrame implements Config{
         this.setResizable(true);
 
         this.add(tabPane);
-        listStickesPanel.setAutoscrolls(true);
+        //listStickesPanel.setAutoscrolls(true);
 
         titlePanel(album.getName());
 

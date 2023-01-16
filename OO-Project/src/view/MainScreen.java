@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import model.Album;
 
@@ -34,7 +35,7 @@ public class MainScreen extends JFrame implements Config{
         albunsListPanel.setBounds(0, 50, WIDTH, 500);
         albunsListPanel.setLayout(new GridLayout(6, 1, 5, 5));
 
-        this.add(albunsListPanel);
+        this.add((albunsListPanel));
     }
 
     private void titlePanel() {
