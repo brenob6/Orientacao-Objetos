@@ -4,6 +4,7 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 
@@ -49,7 +50,27 @@ public class MainScreen extends JFrame implements Config{
         button.setBackground(Config.COLOR_BLACK);
         button.setForeground(Config.COLOR_WHITE);
         button.setPreferredSize(Config.buttonDimension);
-        button.setFont(Config.FONT);
+         button.addMouseListener(new MouseAdapter() {
+            public void mouseClicked(MouseEvent e) {
+            	String leitura = JOptionPane.showInputDialog("Digite o nome do Album");
+				Album album = new Album(3, leitura, "New", null);
+                JPanel panel = new JPanel();
+                
+                panel.setBounds(0, 0, WIDTH, HEIGHT/6);
+                panel.setBackground(Config.COLOR_WHITE);
+                panel.addMouseListener(new MouseAdapter() {
+                });
+                
+                JLabel label = new JLabel();
+                label.setBounds(0, 0, WIDTH, HEIGHT/6);
+                label.setFont(Config.FONT);
+                label.setText(album.getName());
+
+                panel.add(label);
+                albunsListPanel.add(panel);
+
+            }
+        });   button.setFont(Config.FONT);
 
         JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Config.COLOR_BLACK);

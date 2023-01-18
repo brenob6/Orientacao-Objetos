@@ -91,6 +91,27 @@ public class StickerScreen extends JFrame implements Config{
         JButton removeButton = makeButton("-");
         JButton infoButton = makeButton("i");
 
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	sticker.setQuant(sticker.getQuant()+1);
+            	countLabel.setText(String.valueOf(sticker.getQuant()));
+
+            }
+        });
+        
+        removeButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	sticker.setQuant(sticker.getQuant()-1);
+            	countLabel.setText(String.valueOf(sticker.getQuant()));
+            	if (sticker.getQuant() < 0) {
+            		sticker.setQuant(0);
+                	countLabel.setText(String.valueOf(sticker.getQuant()));
+            	}
+            	} 		 
+        });
+
         infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
