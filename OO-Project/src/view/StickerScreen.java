@@ -9,6 +9,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import model.Album;
 import model.Sticker;
@@ -42,6 +44,15 @@ public class StickerScreen extends JFrame implements Config{
         titlePanel(album.getName());
 
         tabPane.add("TODAS", listStickesPanel);
+        tabPane.addChangeListener(new ChangeListener() {
+            public void stateChanged(ChangeEvent e) {
+                listRepeatedPanel.removeAll();
+                listStickesPanel.removeAll();
+                listMissingPanel.removeAll();
+                loadStickerCards(album);
+            }
+        });
+
         tabPane.add("FALTANTES", listMissingPanel);
         tabPane.add("REPETIDAS", listRepeatedPanel);
         loadStickerCards(album);
@@ -64,6 +75,10 @@ public class StickerScreen extends JFrame implements Config{
         this.add(topMenuPane, BorderLayout.NORTH);
     }
 
+    private void updateStickerCards(Album album) {
+            
+    }
+
     private void loadStickerCards(Album album) {
         album.getStickers().forEach(sticker -> {
             listStickesPanel.add(makeStickerCard(sticker));
@@ -83,7 +98,7 @@ public class StickerScreen extends JFrame implements Config{
         JPanel card = new JPanel();
         card.setPreferredSize(Config.carDimension);
         card.setBackground(Config.COLOR_WHITE);
-    
+
         JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
         countLabel.setFont(Config.FONT);
 
