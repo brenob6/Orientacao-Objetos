@@ -28,35 +28,37 @@ public class LoadData {
             "https://pt.wikipedia.org/wiki/Captain_Tsubasa#/media/Ficheiro:Captain_Tsubasa_vol._01.jpg"
     };
 
+    private static String DC = "Heróis DC";
+
     public static ArrayList<Album> getAlbums() {
 
         ArrayList<Album> albumList = new ArrayList<>();
 
         Album dcAlbum = new Album();
-        dcAlbum.setName("Herois DC");
-        dcAlbum.setStickers(makeStickers(new DcSticker()));
+        dcAlbum.setName(DC);
+        dcAlbum.setStickers(makeStickers(DC));
         albumList.add(dcAlbum);
 
         Album cupAlbum = new Album();
-        dcAlbum.setName("Copa do Mundo");
-        dcAlbum.setStickers(makeStickers(new CupSticker()));
+        cupAlbum.setName("Copa do Mundo");
+        cupAlbum.setStickers(makeStickers("Copa do Mundo"));
         albumList.add(cupAlbum);
 
         return albumList;
     }
 
-    private static ArrayList<Sticker> makeStickers(Sticker model) {
+    private static ArrayList<Sticker> makeStickers(String n) {
         
         ArrayList<Sticker> stickerList = new ArrayList<>();
 
-        if(model.equals(new DcSticker())){
+        if(n.equals(DC)){
             for(int i = 0; i < selecao.length; i++) {
                 stickerList.add(new DcSticker(
                     name[i], urlDC[i], movie[i], alias[i]));
             }
         }
 
-        if(model.equals(new CupSticker())) {
+        if(n.equals("Copa do Mundo")) {
             for(int i = 0; i < selecao.length; i++) {
                 stickerList.add(new CupSticker(
                     nameCup[i], urlCup[i], selecao[i], posicao[i]));
