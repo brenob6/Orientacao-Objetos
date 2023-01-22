@@ -2,41 +2,53 @@ package view;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
+import javax.swing.BoxLayout;
 
+import controller.User;
 import model.Album;
 
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import java.awt.Color;
+import java.awt.Container;
 
 import java.util.ArrayList;
 
-public class MainScreen extends JFrame implements Config{
-      
-    private final int WIDTH = 800;
-    private final int HEIGHT = 600;
+public class MainScreen extends JFrame implements Config {
 
-    private final String title = "Pseudo Album";
+    private int y = 100;
 
-    private JPanel albunsListPanel;
+    private JPanel albunsListPanel = new JPanel();
+    private JPanel titlePanel = new JPanel();
 
+    private User controller = new User();
+    private JTabbedPane tabPane = new JTabbedPane();
+    
     public MainScreen() {
+        this.setTitle(TITLENAME);
+        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        this.setLayout(new BorderLayout());
+        this.setResizable(true);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        screenConfig();
+        this.add(tabPane);
         titlePanel(); 
-
-        albunsListPanel = new JPanel();
         
-        albunsListPanel.setBounds(0, 50, WIDTH, 500);
-        albunsListPanel.setLayout(new GridLayout(6, 1, 5, 5));
+        tabPane.add("Teste", albunsListPanel);
 
-        this.add((albunsListPanel));
+        this.setVisible(true);
     }
 
     private void titlePanel() {
@@ -50,69 +62,91 @@ public class MainScreen extends JFrame implements Config{
         button.setBackground(Config.COLOR_BLACK);
         button.setForeground(Config.COLOR_WHITE);
         button.setPreferredSize(Config.buttonDimension);
-         button.addMouseListener(new MouseAdapter() {
+        button.setName("addAlbum");
+
+        button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
-            	String leitura = JOptionPane.showInputDialog("Digite o nome do Album");
-				Album album = new Album(3, leitura, "New", null);
-                JPanel panel = new JPanel();
-                
-                panel.setBounds(0, 0, WIDTH, HEIGHT/6);
-                panel.setBackground(Config.COLOR_WHITE);
-                panel.addMouseListener(new MouseAdapter() {
-                });
-                
-                JLabel label = new JLabel();
-                label.setBounds(0, 0, WIDTH, HEIGHT/6);
-                label.setFont(Config.FONT);
-                label.setText(album.getName());
-
-                panel.add(label);
-                albunsListPanel.add(panel);
-
+                showModalForm();
             }
         });   button.setFont(Config.FONT);
 
-        JPanel titlePanel = new JPanel();
         titlePanel.setBackground(Config.COLOR_BLACK);
         titlePanel.setBounds(0, 0, WIDTH, 50);
         titlePanel.add(label);
         titlePanel.add(button);
 
-        this.add(titlePanel);
+        this.add(titlePanel, BorderLayout.NORTH);
     }
 
-    public void makeAlbumCard(Album album) {
-        JPanel panel = new JPanel();
-        panel.setBounds(0, 0, WIDTH, HEIGHT/6);
-        panel.setBackground(Config.COLOR_WHITE);
-        panel.addMouseListener(new MouseAdapter() {
+    private void showModalForm () {
+        String[] items = {"Heróis DC", "Copa do Mundo"};
+        JComboBox<String> combo = new JComboBox<>(items);
+        JTextField field = new JTextField();
+
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(combo);
+        panel.add(new JLabel("Nome:"));
+        panel.add(field);
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Album",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+            String name = (String) combo.getSelectedItem(); 
+            String alias = field.getText();
+
+            Album album = controller.findAlbum(name);
+            album.setAlias(alias);
+            controller.addAlbum(album);
+            //updateList();
+            albunsListPanel.add(makeAlbumCard(album));
+            albunsListPanel.revalidate();
+            albunsListPanel.repaint();
+        }
+
+    }
+
+    private void updateList () {
+        albunsListPanel.removeAll();
+        controller.getUserAlbuns().forEach(album -> albunsListPanel.add(makeAlbumCard(album)));
+    }
+
+    public JPanel makeAlbumCard(Album album) {
+        JPanel card = new JPanel();
+        card.setPreferredSize(cardDimension);
+        card.setBackground(COLOR_WHITE);
+
+        JLabel nameLabel = new JLabel(album.getName());
+        nameLabel.setFont(Config.FONT);
+
+        JLabel aliasLabel = new JLabel(album.getAlias());
+        aliasLabel.setFont(FONT);
+
+        JButton button = Componets.makeButton("X");
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                removeAlbumCard(card);
+                controller.removeAlbum(album);
+                albunsListPanel.revalidate();
+                albunsListPanel.repaint();
+            }
+        });
+
+        card.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
                 new StickerScreen(album);
             }
         });
 
-        JLabel label = new JLabel();
-        label.setBounds(0, 0, WIDTH, HEIGHT/6);
-        label.setFont(Config.FONT);
-        label.setText(album.getName());
+        card.add(nameLabel);
+        card.add(aliasLabel);
+        card.add(button);
 
-        panel.add(label);
-        
-        albunsListPanel.add(panel);
+        return card; 
     }
 
     private void removeAlbumCard(JPanel card) {
         albunsListPanel.remove(card);
     }
 
-    private void screenConfig() {
-        this.setTitle(title);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(new BorderLayout());
-        this.setSize(WIDTH, HEIGHT);
-        this.setResizable(false);
-        this.setLayout(null);
-
-        this.setVisible(true);
-    }
 }
