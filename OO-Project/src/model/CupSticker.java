@@ -39,4 +39,6 @@ public class CupSticker extends Sticker{
 
     }
 
+    public CupSticker(){}
+
 }

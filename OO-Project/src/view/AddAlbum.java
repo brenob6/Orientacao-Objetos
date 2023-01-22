@@ -7,10 +7,15 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import controller.LoadData;
+import controller.User;
+import model.Album;
+
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 
 public class AddAlbum extends JFrame implements Config, ActionListener {
@@ -21,7 +26,9 @@ public class AddAlbum extends JFrame implements Config, ActionListener {
     private JTextField textField;
     private JComboBox combo;
 
-    public AddAlbum(){
+    private MainScreen link;
+
+    public AddAlbum(MainScreen link){
         this.setTitle("Criar Album");
         this.setSize(MODAL_WIDTH, MODAL_HEIGHT);
         this.setResizable(false);
@@ -29,6 +36,7 @@ public class AddAlbum extends JFrame implements Config, ActionListener {
         this.setVisible(true);
 
         makeAlbumForm();
+        this.link = link;
     }
 
     private void makeAlbumForm() {
@@ -46,7 +54,8 @@ public class AddAlbum extends JFrame implements Config, ActionListener {
 
         textField = new JTextField();
 
-        String[] options = {"Heróis DC", "Copa do Mundo"};
+        String[]  options = {"Heróis DC", "Copa do Mundo"};
+
         combo = new JComboBox<String>(options);
         combo.setBounds(50, 30, 150, 40);
 
@@ -68,8 +77,11 @@ public class AddAlbum extends JFrame implements Config, ActionListener {
         }
 
         if(src == createButton) {
-            String name = textField.getText();
-            String seleted = (String) combo.getSelectedItem();
+            String alias = textField.getText();
+            String name = (String) combo.getSelectedItem();
+
+            Album album = new Album();
+            link.makeAlbumCard(album);
         }
     }
 }

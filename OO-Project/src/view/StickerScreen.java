@@ -39,7 +39,6 @@ public class StickerScreen extends JFrame implements Config{
         this.setResizable(true);
 
         this.add(tabPane);
-        //listStickesPanel.setAutoscrolls(true);
 
         titlePanel(album.getName());
 
@@ -75,10 +74,6 @@ public class StickerScreen extends JFrame implements Config{
         this.add(topMenuPane, BorderLayout.NORTH);
     }
 
-    private void updateStickerCards(Album album) {
-            
-    }
-
     private void loadStickerCards(Album album) {
         album.getStickers().forEach(sticker -> {
             listStickesPanel.add(makeStickerCard(sticker));
@@ -96,7 +91,7 @@ public class StickerScreen extends JFrame implements Config{
     public JPanel makeStickerCard(Sticker sticker) {
 
         JPanel card = new JPanel();
-        card.setPreferredSize(Config.carDimension);
+        card.setPreferredSize(Config.cardDimension);
         card.setBackground(Config.COLOR_WHITE);
 
         JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
@@ -123,8 +118,8 @@ public class StickerScreen extends JFrame implements Config{
             	if (sticker.getQuant() < 0) {
             		sticker.setQuant(0);
                 	countLabel.setText(String.valueOf(sticker.getQuant()));
-            	}
-            	} 		 
+                }
+            } 		 
         });
 
         infoButton.addActionListener(new ActionListener() {

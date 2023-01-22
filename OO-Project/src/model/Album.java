@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 public class Album {
     
-    private int id;
     private String name;
     private String alias;
     private ArrayList<Sticker> stickers;
@@ -36,19 +35,18 @@ public class Album {
         
     }
     
-    public Album(int id, String name, String alias, ArrayList<Sticker> stickers) {
-        this.id = id;
+    public Album(String name, String alias, ArrayList<Sticker> stickers) {
         this.name = name;
         this.alias = alias;
         this.stickers = stickers;
     }
 
+    public Album(){}
+
     public int getTotal() {
         return this.stickers.size();
     }
-    public int getId() {
-        return this.id;
-    }
+
     public String getName() {
         return name;
     } 
