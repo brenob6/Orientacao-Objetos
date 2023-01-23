@@ -127,6 +127,19 @@ public class MainScreen extends JFrame implements Config {
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
+                JTextField editField = new JTextField();
+
+                JPanel panel = new JPanel(new GridLayout(0, 1));
+                panel.add(new JLabel("Novo apelido:"));
+                panel.add(editField);
+
+                int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Album",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (result == JOptionPane.OK_OPTION) {
+                    album.setAlias(editField.getText());
+                    aliasLabel.setText(album.getAlias());
+                }
             }
         });
         deleteBtn.addActionListener(new ActionListener() {
