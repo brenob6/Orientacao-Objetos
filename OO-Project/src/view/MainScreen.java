@@ -10,6 +10,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneLayout;
 import javax.swing.BoxLayout;
 
 import controller.User;
@@ -46,7 +47,7 @@ public class MainScreen extends JFrame implements Config {
         this.add(tabPane);
         titlePanel(); 
         
-        tabPane.add("Teste", albunsListPanel);
+        tabPane.add("Meus Albuns", albunsListPanel);
 
         this.setVisible(true);
     }
@@ -121,8 +122,14 @@ public class MainScreen extends JFrame implements Config {
         JLabel aliasLabel = new JLabel(album.getAlias());
         aliasLabel.setFont(FONT);
 
-        JButton button = Componets.makeButton("X");
-        button.addActionListener(new ActionListener() {
+        JButton deleteBtn = Componets.makeButton("X");
+        JButton editBtn = Componets.makeButton("e");
+        editBtn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            }
+        });
+        deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 removeAlbumCard(card);
@@ -140,7 +147,8 @@ public class MainScreen extends JFrame implements Config {
 
         card.add(nameLabel);
         card.add(aliasLabel);
-        card.add(button);
+        card.add(editBtn);
+        card.add(deleteBtn);
 
         return card; 
     }
