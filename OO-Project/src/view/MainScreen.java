@@ -145,7 +145,7 @@ public class MainScreen extends JFrame implements Config {
         deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                removeAlbumCard(card);
+                albunsListPanel.remove(card);
                 controller.removeAlbum(album);
                 albunsListPanel.revalidate();
                 albunsListPanel.repaint();
@@ -164,10 +164,6 @@ public class MainScreen extends JFrame implements Config {
         card.add(deleteBtn);
 
         return card; 
-    }
-
-    private void removeAlbumCard(JPanel card) {
-        albunsListPanel.remove(card);
     }
 
 }
