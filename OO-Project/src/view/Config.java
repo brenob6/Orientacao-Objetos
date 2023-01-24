@@ -24,4 +24,7 @@ public interface Config {
     Color BACKGROUND_COLOR = new Color(0xCFFDE1);
     Color COLOR_WHITE = new Color(0xE5E5CB);
     Color COLOR_BLACK = new Color(0x1A120B);
+    Color COLOR_RED = new Color(0xDC3535);
+    Color COLOR_YELLOW = new Color(0xF49D1A);
+    Color COLOR_BLUE = new Color(0x0081C9);
 }
