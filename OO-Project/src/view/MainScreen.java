@@ -1,6 +1,7 @@
 package view;
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -15,7 +16,7 @@ import javax.swing.BoxLayout;
 
 import controller.User;
 import model.Album;
-
+import java.awt.*;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
@@ -29,10 +30,9 @@ import java.util.ArrayList;
 
 public class MainScreen extends JFrame implements Config {
 
-    private int y = 100;
-
     private JPanel albunsListPanel = new JPanel();
     private JPanel titlePanel = new JPanel();
+    private JScrollPane scrollPane = new JScrollPane();
 
     private User controller = new User();
     private JTabbedPane tabPane = new JTabbedPane();
@@ -40,14 +40,18 @@ public class MainScreen extends JFrame implements Config {
     public MainScreen() {
         this.setTitle(TITLENAME);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        this.setLayout(new BorderLayout());
+        //this.setLayout(new BorderLayout());
         this.setResizable(true);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.add(tabPane);
+        albunsListPanel.setLayout(new BoxLayout(albunsListPanel, BoxLayout.Y_AXIS));
+        this.scrollPane.setViewportView(albunsListPanel);;
+        this.add(scrollPane);
         titlePanel(); 
         
-        tabPane.add("Meus Albuns", albunsListPanel);
+        //tabPane.add("Meus Albuns", albunsListPanel);
+        //tabPane.add("Meus Albuns", scrollPane);
 
         this.setVisible(true);
     }
@@ -98,8 +102,11 @@ public class MainScreen extends JFrame implements Config {
             Album album = controller.findAlbum(name);
             album.setAlias(alias);
             controller.addAlbum(album);
-            //updateList();
-            albunsListPanel.add(makeAlbumCard(album));
+            JPanel card = makeAlbumCard(album);
+            card.setMaximumSize(cardDimension);
+            card.setMinimumSize(cardDimension);
+            //albunsListPanel.add(makeAlbumCard(album), Box.createHorizontalBox());
+            albunsListPanel.add(card);
             albunsListPanel.revalidate();
             albunsListPanel.repaint();
         }
@@ -112,9 +119,12 @@ public class MainScreen extends JFrame implements Config {
     }
 
     public JPanel makeAlbumCard(Album album) {
-        JPanel card = new JPanel();
-        card.setPreferredSize(cardDimension);
-        card.setBackground(COLOR_WHITE);
+        //JPanel card = new JPanel();
+        //card.setPreferredSize(cardDimension);
+        //card.setSize(cardDimension);
+        //card.setBackground(COLOR_WHITE);
+
+        JPanel card = Componets.card();
 
         JLabel nameLabel = new JLabel(album.getName());
         nameLabel.setFont(Config.FONT);
@@ -122,8 +132,8 @@ public class MainScreen extends JFrame implements Config {
         JLabel aliasLabel = new JLabel(album.getAlias());
         aliasLabel.setFont(FONT);
 
-        JButton deleteBtn = Componets.makeButton("X");
-        JButton editBtn = Componets.makeButton("e");
+        JButton deleteBtn = Componets.makeButton("X", COLOR_RED);
+        JButton editBtn = Componets.makeButton("e", COLOR_YELLOW);
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
