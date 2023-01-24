@@ -1,6 +1,8 @@
 package view;
 
+import javax.swing.*;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -17,7 +19,7 @@ import model.Album;
 import model.CupSticker;
 import model.DcSticker;
 import model.Sticker;
-
+import java.awt.*;
 import java.awt.FlowLayout;
 import java.awt.GridLayout;
 import java.awt.BorderLayout;
@@ -30,8 +32,12 @@ public class StickerScreen extends JFrame implements Config{
 
     private JPanel topMenuPane = new JPanel();
     private JPanel listStickesPanel = new JPanel();
-    private JPanel listRepeatedPanel = new JPanel();
+    private JPanel listRepeatedPanel = new JPanel(); 
     private JPanel listMissingPanel = new JPanel();
+
+    private JScrollPane listStickesScrollPanel = new JScrollPane();
+    private JScrollPane listRepeatedScrollPanel = new JScrollPane();
+    private JScrollPane listMissingScrollPanel = new JScrollPane();
 
     private JTabbedPane tabPane = new JTabbedPane();
 
@@ -44,11 +50,19 @@ public class StickerScreen extends JFrame implements Config{
         this.setLayout(new BorderLayout());
         this.setResizable(true);
 
+        listStickesPanel.setLayout(new BoxLayout(listStickesPanel, BoxLayout.Y_AXIS));
+        listRepeatedPanel.setLayout(new BoxLayout(listRepeatedPanel, BoxLayout.Y_AXIS));
+        listMissingPanel.setLayout(new BoxLayout(listMissingPanel, BoxLayout.Y_AXIS));
+        
+        listStickesScrollPanel.setViewportView(listStickesPanel);
+        listRepeatedScrollPanel.setViewportView(listRepeatedPanel);
+        listMissingScrollPanel.setViewportView(listMissingPanel);
+
         this.add(tabPane);
 
         titlePanel(this.album.getName());
 
-        tabPane.add("TODAS", listStickesPanel);
+        tabPane.add("TODAS", listStickesScrollPanel);
         tabPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 listRepeatedPanel.removeAll();
@@ -58,8 +72,8 @@ public class StickerScreen extends JFrame implements Config{
             }
         });
 
-        tabPane.add("FALTANTES", listMissingPanel);
-        tabPane.add("REPETIDAS", listRepeatedPanel);
+        tabPane.add("FALTANTES", listMissingScrollPanel);
+        tabPane.add("REPETIDAS", listRepeatedScrollPanel);
         loadStickerCards(album);
 
         this.add(tabPane, BorderLayout.CENTER);
@@ -72,7 +86,7 @@ public class StickerScreen extends JFrame implements Config{
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
-        JButton addButton = Componets.makeButton("+");
+        JButton addButton = Componets.makeButton("+", COLOR_BLACK);
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -146,17 +160,19 @@ public class StickerScreen extends JFrame implements Config{
 
     public JPanel makeStickerCard(Sticker sticker) {
 
-        JPanel card = new JPanel();
-        card.setPreferredSize(Config.cardDimension);
-        card.setBackground(Config.COLOR_WHITE);
+        //JPanel card = new JPanel();
+        //card.setPreferredSize(Config.cardDimension);
+        //card.setBackground(Config.COLOR_WHITE);
+
+        JPanel card = Componets.card();
 
         JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
         countLabel.setFont(Config.FONT);
 
-        JButton addButton = makeButton("+");
-        JButton removeButton = makeButton("-");
-        JButton infoButton = makeButton("i");
-        JButton deleteButton = makeButton("X");
+        JButton addButton = Componets.makeButton("+", COLOR_BLACK);
+        JButton removeButton = Componets.makeButton("-", COLOR_BLACK);
+        JButton infoButton = Componets.makeButton("i", COLOR_BLUE);
+        JButton deleteButton = Componets.makeButton("X", COLOR_RED);
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -226,15 +242,5 @@ public class StickerScreen extends JFrame implements Config{
         }
         text += "</html>";
         return text;
-    }
-
-    private JButton makeButton(String text) {
-        JButton button = new JButton(text);
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setPreferredSize(Config.buttonDimension);
-        button.setForeground(Config.COLOR_WHITE);
-        button.setFont(Config.FONT);
-        button.setBackground(Config.COLOR_BLACK);
-        return button;
     }
 }
