@@ -9,10 +9,13 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import model.Album;
+import model.CupSticker;
+import model.DcSticker;
 import model.Sticker;
 
 import java.awt.FlowLayout;
@@ -32,7 +35,10 @@ public class StickerScreen extends JFrame implements Config{
 
     private JTabbedPane tabPane = new JTabbedPane();
 
+    private Album album;
+
     public StickerScreen(Album album) {
+        this.album = album;
         this.setTitle("Pseudo Album");
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
         this.setLayout(new BorderLayout());
@@ -40,7 +46,7 @@ public class StickerScreen extends JFrame implements Config{
 
         this.add(tabPane);
 
-        titlePanel(album.getName());
+        titlePanel(this.album.getName());
 
         tabPane.add("TODAS", listStickesPanel);
         tabPane.addChangeListener(new ChangeListener() {
@@ -66,15 +72,57 @@ public class StickerScreen extends JFrame implements Config{
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
+        JButton addButton = Componets.makeButton("+");
+        addButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JTextField nameField = new JTextField();
+
+                JPanel panel = new JPanel(new GridLayout(0, 1));
+                panel.add(new JLabel("Nome:"));
+                panel.add(nameField);
+
+                int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Figura",
+                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                if (result == JOptionPane.OK_OPTION) {
+
+                    Sticker sticker = null;
+                    switch (album.getName()) {
+                        case "Heróis DC" :
+                        sticker = new DcSticker();
+
+                        break;
+                        case "Copa do Mundo":
+                        sticker = new CupSticker();
+                        break;
+                        
+                        default:
+                        sticker = new DcSticker();
+                    }
+            
+                    sticker.setName(nameField.getText());
+                    album.getStickers().add(sticker);
+                    loadStickerCards(album);
+                }
+
+            }
+        });
+
         JLabel label = new JLabel(title);
         label.setFont(Config.FONT);
         label.setForeground(Config.COLOR_WHITE);
 
         topMenuPane.add(label);
+        topMenuPane.add(addButton);
+
         this.add(topMenuPane, BorderLayout.NORTH);
     }
 
     private void loadStickerCards(Album album) {
+        listStickesPanel.removeAll();
+        listRepeatedPanel.removeAll();
+        listMissingPanel.removeAll();
+
         album.getStickers().forEach(sticker -> {
             listStickesPanel.add(makeStickerCard(sticker));
         });
@@ -86,6 +134,14 @@ public class StickerScreen extends JFrame implements Config{
         album.getMissingStickers().forEach(sticker -> {
             listMissingPanel.add(makeStickerCard(sticker));
         });
+
+        listStickesPanel.revalidate();
+        listStickesPanel.repaint();
+        listMissingPanel.revalidate();
+        listMissingPanel.repaint();
+        listRepeatedPanel.revalidate();
+        listRepeatedPanel.repaint();
+        
     }
 
     public JPanel makeStickerCard(Sticker sticker) {
@@ -100,6 +156,7 @@ public class StickerScreen extends JFrame implements Config{
         JButton addButton = makeButton("+");
         JButton removeButton = makeButton("-");
         JButton infoButton = makeButton("i");
+        JButton deleteButton = makeButton("X");
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -125,12 +182,18 @@ public class StickerScreen extends JFrame implements Config{
         infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JOptionPane.showMessageDialog(
-                    //null, null, sticker.getName(), 1, sticker.getImage());
-                    null, makeInfoPanel(sticker), "Informações", JOptionPane.INFORMATION_MESSAGE);
+                makeInfoPanel(sticker);    
             }
         });
     
+        deleteButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                album.getStickers().remove(sticker);
+                loadStickerCards(album);
+            }
+        });
+
         JLabel nameLabel = new JLabel(); 
         nameLabel.setFont(Config.FONT);
         nameLabel.setText(sticker.getName());
@@ -141,6 +204,7 @@ public class StickerScreen extends JFrame implements Config{
         card.add(countLabel);
         card.add(removeButton);
         card.add(infoButton);
+        card.add(deleteButton);
 
         return card;
     }
