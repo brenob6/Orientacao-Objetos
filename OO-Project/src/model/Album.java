@@ -34,7 +34,7 @@ public class Album {
         return missing;
         
     }
-    
+
     public Album(String name, String alias, ArrayList<Sticker> stickers) {
         this.name = name;
         this.alias = alias;
