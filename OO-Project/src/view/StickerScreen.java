@@ -1,9 +1,6 @@
 package view;
 
-import javax.swing.*;
-import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,12 +16,14 @@ import model.Album;
 import model.CupSticker;
 import model.DcSticker;
 import model.Sticker;
-import java.awt.*;
-import java.awt.FlowLayout;
+import java.awt.Color;
 import java.awt.GridLayout;
-import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Font;
+import java.awt.BorderLayout;
+import java.awt.event.*;
+import java.awt.event.KeyAdapter;
+import java.awt.event.InputMethodListener;
+import java.awt.event.InputMethodEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
@@ -47,8 +46,7 @@ public class StickerScreen extends JFrame implements Config{
         this.album = album;
         this.setTitle("Pseudo Album");
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
-        this.setLayout(new BorderLayout());
-        this.setResizable(true);
+        this.setResizable(false);
 
         listStickesPanel.setLayout(new BoxLayout(listStickesPanel, BoxLayout.Y_AXIS));
         listRepeatedPanel.setLayout(new BoxLayout(listRepeatedPanel, BoxLayout.Y_AXIS));
@@ -60,9 +58,12 @@ public class StickerScreen extends JFrame implements Config{
 
         this.add(tabPane);
 
-        titlePanel(this.album.getName());
+        topMenuPane = titlePanel(this.album.getName());
 
         tabPane.add("TODAS", listStickesScrollPanel);
+        tabPane.add("FALTANTES", listMissingScrollPanel);
+        tabPane.add("REPETIDAS", listRepeatedScrollPanel);
+
         tabPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 listRepeatedPanel.removeAll();
@@ -72,21 +73,39 @@ public class StickerScreen extends JFrame implements Config{
             }
         });
 
-        tabPane.add("FALTANTES", listMissingScrollPanel);
-        tabPane.add("REPETIDAS", listRepeatedScrollPanel);
         loadStickerCards(album);
 
+        this.add(topMenuPane, BorderLayout.NORTH);
         this.add(tabPane, BorderLayout.CENTER);
 
         this.setVisible(true);
     }
 
-    private void titlePanel(String title) {
+    private JPanel titlePanel(String title) {
         topMenuPane.setSize(800, 100);
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
+        JLabel label = Componets.label(title);
+        label.setForeground(COLOR_WHITE);
+
         JButton addButton = Componets.makeButton("+", COLOR_BLACK);
+
+        JTextField searchField = new JTextField();
+        searchField.setPreferredSize(new Dimension(80, 40));
+
+        topMenuPane.add(label);
+        topMenuPane.add(addButton);
+        topMenuPane.add(searchField);
+
+        searchField.addKeyListener(new KeyAdapter () {
+            @Override
+            public void keyReleased (KeyEvent e) {
+                tabPane.setSelectedComponent(listStickesScrollPanel);
+            }
+
+        });;
+
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -121,15 +140,8 @@ public class StickerScreen extends JFrame implements Config{
 
             }
         });
-
-        JLabel label = new JLabel(title);
-        label.setFont(Config.FONT);
-        label.setForeground(Config.COLOR_WHITE);
-
-        topMenuPane.add(label);
-        topMenuPane.add(addButton);
-
-        this.add(topMenuPane, BorderLayout.NORTH);
+        return topMenuPane;
+        //this.add(topMenuPane, BorderLayout.NORTH);
     }
 
     private void loadStickerCards(Album album) {
@@ -160,19 +172,22 @@ public class StickerScreen extends JFrame implements Config{
 
     public JPanel makeStickerCard(Sticker sticker) {
 
-        //JPanel card = new JPanel();
-        //card.setPreferredSize(Config.cardDimension);
-        //card.setBackground(Config.COLOR_WHITE);
-
         JPanel card = Componets.card();
 
-        JLabel countLabel = new JLabel(String.valueOf(sticker.getQuant()));
-        countLabel.setFont(Config.FONT);
+        JLabel nameLabel = Componets.label(sticker.getName());
+        JLabel countLabel = Componets.label(String.valueOf(sticker.getQuant()));
 
         JButton addButton = Componets.makeButton("+", COLOR_BLACK);
         JButton removeButton = Componets.makeButton("-", COLOR_BLACK);
         JButton infoButton = Componets.makeButton("i", COLOR_BLUE);
         JButton deleteButton = Componets.makeButton("X", COLOR_RED);
+
+        card.add(nameLabel);
+        card.add(addButton);
+        card.add(countLabel);
+        card.add(removeButton);
+        card.add(infoButton);
+        card.add(deleteButton);
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -198,7 +213,8 @@ public class StickerScreen extends JFrame implements Config{
         infoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                makeInfoPanel(sticker);    
+                JOptionPane.showMessageDialog(
+                    null, makeInfoPanel(sticker), "Informações", JOptionPane.INFORMATION_MESSAGE);
             }
         });
     
@@ -209,18 +225,6 @@ public class StickerScreen extends JFrame implements Config{
                 loadStickerCards(album);
             }
         });
-
-        JLabel nameLabel = new JLabel(); 
-        nameLabel.setFont(Config.FONT);
-        nameLabel.setText(sticker.getName());
-        nameLabel.setBackground(Config.COLOR_WHITE);
-        
-        card.add(nameLabel);
-        card.add(addButton);
-        card.add(countLabel);
-        card.add(removeButton);
-        card.add(infoButton);
-        card.add(deleteButton);
 
         return card;
     }
