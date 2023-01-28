@@ -9,7 +9,7 @@ import java.awt.event.*;
  * Class responsible for having a standard setting to be applied in the view's screen. It is going to implement the interface Config. 
  *
  */
-public class Componets implements Config{
+public class Componets {
 
 	/**
 	 * Static method responsible for setting the constants for a card
@@ -19,8 +19,8 @@ public class Componets implements Config{
 
         JPanel card = new JPanel();
         //card.setPreferredSize(Config.cardDimension);
-        card.setMaximumSize(cardDimension);
-        card.setMinimumSize(cardDimension);
+        card.setMaximumSize(Config.cardDimension);
+        card.setMinimumSize(Config.cardDimension);
         card.setBackground(Config.COLOR_WHITE);
 
         return card;
@@ -50,9 +50,9 @@ public class Componets implements Config{
         JButton button = new JButton(text);
         button.setBorder(BorderFactory.createEmptyBorder());
         button.setBackground(background);
-        button.setForeground(COLOR_WHITE);
-        button.setPreferredSize(buttonDimension);
-        button.setFont(FONT);
+        button.setForeground(Config.COLOR_WHITE);
+        button.setPreferredSize(Config.buttonDimension);
+        button.setFont(Config.FONT);
         button.addMouseListener(new MouseAdapter(){
 
             public void mouseEntered (MouseEvent e) {

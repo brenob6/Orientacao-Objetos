@@ -1,41 +1,22 @@
 package view;
 
 import javax.swing.*;
-import javax.swing.BorderFactory;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 import java.awt.*;
-import model.Album;
-import model.CupSticker;
-import model.DcSticker;
-import model.Sticker;
-import java.awt.Color;
-import java.awt.GridLayout;
-import java.awt.Dimension;
-import java.awt.BorderLayout;
+import model.*;
+
 import java.awt.event.*;
 import java.awt.event.KeyAdapter;
+
 import java.util.ArrayList;
-import java.awt.event.InputMethodListener;
-import java.awt.event.InputMethodEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
     /**
      * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the sticker screen 
      * so that the user can interact with the album through the actions provided by the cards, buttons and its events.
      *
      */
-public class StickerScreen extends JFrame implements Config {
+public class StickerScreen extends JFrame {
 
     private JPanel topMenuPane = new JPanel();
     private JPanel listStickesPanel = new JPanel();
@@ -78,31 +59,35 @@ public class StickerScreen extends JFrame implements Config {
 
         tabPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                switch (tabPane.getSelectedIndex()) {
-                    case 0:
-                    listRepeatedPanel.removeAll();
-                    load(album.getStickers(), listStickesPanel);
-                    break;
-                    case 1:
-                    listMissingPanel.removeAll();
-                    load(album.getMissingStickers(), listMissingPanel);
-                    break;
-                    case 2:
-                    listStickesPanel.removeAll();
-                    load(album.getRepeatedStickers(), listRepeatedPanel);
-                    break;
-                }
+                updateScreen();
+                //switch (tabPane.getSelectedIndex()) {
+                //    case 0:
+                //    listRepeatedPanel.removeAll();
+                //    //updatePanel(album.getStickers(), listStickesPanel);
+                //    updateScreen();
+                //    break;
+                //    case 1:
+                //    listMissingPanel.removeAll();
+                //    //updatePanel(album.getMissingStickers(), listMissingPanel);
+                //    updateScreen();
+                //    break;
+                //    case 2:
+                //    listStickesPanel.removeAll();
+                //    //updatePanel(album.getRepeatedStickers(), listRepeatedPanel);
+                //    updateScreen();
+                //    break;
+                //}
                 //loadStickerCards(album);
-                load(album.getStickers(), listStickesPanel);
+                updatePanel(album.getStickers(), listStickesPanel);
             }
         });
 
-        loadStickerCards(album);
-        //load(album.getStickers(), listStickesPanel);
-
+        //loadStickerCards(album);
+        //updatePanel(album.getStickers(), listStickesPanel);
+        
         this.add(topMenuPane, BorderLayout.NORTH);
         this.add(tabPane, BorderLayout.CENTER);
-
+        updateScreen();
         this.setVisible(true);
     }
 
@@ -118,13 +103,13 @@ public class StickerScreen extends JFrame implements Config {
         topMenuPane.setVisible(true);
 
         JLabel label = Componets.label(album.getName());
-        label.setForeground(COLOR_WHITE);
+        label.setForeground(Config.COLOR_WHITE);
 
-        JButton addButton = Componets.makeButton("+", COLOR_BLACK);
+        JButton addButton = Componets.makeButton("+", Config.COLOR_BLACK);
 
         JTextField searchField = new JTextField();
         searchField.setPreferredSize(new Dimension(200, 35));
-        searchField.setFont(FONT);
+        searchField.setFont(Config.FONT);
         searchField.setBorder(BorderFactory.createEmptyBorder());
 
         topMenuPane.add(label);
@@ -136,7 +121,7 @@ public class StickerScreen extends JFrame implements Config {
             public void keyReleased (KeyEvent e) {
                 tabPane.setSelectedComponent(listStickesScrollPanel);
                 ArrayList<Sticker> finded = album.findStickers(searchField.getText());
-                load(finded, listStickesPanel);
+                updatePanel(finded, listStickesPanel);
             }
 
         });
@@ -229,12 +214,31 @@ public class StickerScreen extends JFrame implements Config {
             }
     
             album.getStickers().add(sticker);
-            loadStickerCards(album);
+            updateScreen();
+            //updatePanel(album.getStickers(), listStickesPanel);
+            //updatePanel(album.getMissingStickers(), listMissingPanel);
+            //loadStickerCards(album);
         }
 
     }
 
-    private void load (ArrayList<Sticker> list, JPanel panel) {
+    private void updateScreen () {
+        switch (tabPane.getSelectedIndex()) {
+            case 0:
+            updatePanel(album.getStickers(), listStickesPanel);
+            break;
+
+            case 1:
+            updatePanel(album.getMissingStickers(), listMissingPanel);
+            break;
+
+            case 2:
+            updatePanel(album.getRepeatedStickers(), listRepeatedPanel);
+            break;
+        }
+    }
+
+    private void updatePanel (ArrayList<Sticker> list, JPanel panel) {
         panel.removeAll();
         
         list.forEach(sticker -> {
@@ -276,6 +280,7 @@ public class StickerScreen extends JFrame implements Config {
         listRepeatedPanel.repaint();
         
     }
+
     /**
      * Method responsible for creating a sticker card 
      * @param sticker
@@ -289,10 +294,10 @@ public class StickerScreen extends JFrame implements Config {
         nameLabel.setPreferredSize(new Dimension(300, 40));
         JLabel countLabel = Componets.label(String.valueOf(sticker.getQuant()));
 
-        JButton addButton = Componets.makeButton("+", COLOR_BLACK);
-        JButton removeButton = Componets.makeButton("-", COLOR_BLACK);
-        JButton infoButton = Componets.makeButton("i", COLOR_BLUE);
-        JButton deleteButton = Componets.makeButton("X", COLOR_RED);
+        JButton addButton = Componets.makeButton("+", Config.COLOR_BLACK);
+        JButton removeButton = Componets.makeButton("-", Config.COLOR_BLACK);
+        JButton infoButton = Componets.makeButton("i", Config.COLOR_BLUE);
+        JButton deleteButton = Componets.makeButton("X", Config.COLOR_RED);
 
         card.add(nameLabel);
         card.add(addButton);
@@ -334,12 +339,15 @@ public class StickerScreen extends JFrame implements Config {
             @Override
             public void actionPerformed(ActionEvent e) {
                 album.getStickers().remove(sticker);
-                loadStickerCards(album);
+                //updatePanel(album.getStickers(),  
+                //loadStickerCards(album);
+                updateScreen();
             }
         });
 
         return card;
     }
+
     /**
      * Method responsible for creating a panel that gives the information about the sticker 
      * @param sticker
@@ -353,6 +361,7 @@ public class StickerScreen extends JFrame implements Config {
         panel.add(img);
         return panel;
     }
+
     /**
      * Method responsible for generating an organized and visible text in more than one line that contains the sticker's information  
      * @param sticker

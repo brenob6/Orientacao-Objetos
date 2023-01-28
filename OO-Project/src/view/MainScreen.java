@@ -1,25 +1,11 @@
 package view;
 
-import javax.swing.JButton;
-import javax.swing.JComboBox;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTextField;
-import javax.swing.BoxLayout;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 import controller.User;
 import model.Album;
-import java.awt.Color;
-import java.awt.BorderLayout;
-import java.awt.GridLayout;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 /**
  * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the main screen 
@@ -27,7 +13,7 @@ import java.awt.event.ActionEvent;
  *
  */
 
-public class MainScreen extends JFrame implements Config {
+public class MainScreen extends JFrame {
 
     private JPanel albunsListPanel = new JPanel();
     private JPanel titlePanel = new JPanel();
@@ -39,8 +25,8 @@ public class MainScreen extends JFrame implements Config {
      * Constructor responsible for instantiate the class MainScreen
      */
     public MainScreen() {
-        this.setTitle(TITLENAME);
-        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
+        this.setTitle(Config.TITLENAME);
+        this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
         this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -62,7 +48,7 @@ public class MainScreen extends JFrame implements Config {
         label.setFont(Config.FONT);
         label.setForeground(Config.COLOR_WHITE);
 
-        JButton button = Componets.makeButton("+", COLOR_BLACK);
+        JButton button = Componets.makeButton("+", Config.COLOR_BLACK);
 
         button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -104,22 +90,14 @@ public class MainScreen extends JFrame implements Config {
             controller.addAlbum(album);
 
             JPanel card = makeAlbumCard(album);
-            card.setMaximumSize(cardDimension);
-            card.setMinimumSize(cardDimension);
+            card.setMaximumSize(Config.cardDimension);
+            card.setMinimumSize(Config.cardDimension);
             //albunsListPanel.add(makeAlbumCard(album), Box.createHorizontalBox());
             albunsListPanel.add(card);
             albunsListPanel.revalidate();
             albunsListPanel.repaint();
         }
 
-    }
-
-    /**
-     * Method responsible for generating an update in the album's list
-     */
-    private void updateList () {
-        albunsListPanel.removeAll();
-        controller.getUserAlbuns().forEach(album -> albunsListPanel.add(makeAlbumCard(album)));
     }
 
     /**
@@ -133,10 +111,10 @@ public class MainScreen extends JFrame implements Config {
         JLabel nameLabel = Componets.label(album.getName());
 
         JLabel aliasLabel = new JLabel(album.getAlias());
-        aliasLabel.setFont(FONT);
+        aliasLabel.setFont(Config.FONT);
 
-        JButton deleteBtn = Componets.makeButton("X", COLOR_RED);
-        JButton editBtn = Componets.makeButton("e", COLOR_YELLOW);
+        JButton deleteBtn = Componets.makeButton("X", Config.COLOR_RED);
+        JButton editBtn = Componets.makeButton("e", Config.COLOR_YELLOW);
 
         editBtn.addActionListener(new ActionListener() {
         	
@@ -168,11 +146,11 @@ public class MainScreen extends JFrame implements Config {
 
         card.addMouseListener(new MouseAdapter() {
             public void mouseEntered (MouseEvent e) {
-                card.setBackground(COLOR_CREAM);
+                card.setBackground(Config.COLOR_CREAM);
             }
 
             public void mouseExited (MouseEvent e) {
-                card.setBackground(COLOR_WHITE);
+                card.setBackground(Config.COLOR_WHITE);
             }
             public void mouseClicked(MouseEvent e) {
                 new StickerScreen(album);

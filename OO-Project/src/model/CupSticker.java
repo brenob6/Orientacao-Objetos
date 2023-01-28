@@ -1,4 +1,5 @@
 package model;
+
 /**
  * Class responsible for simulating Cup sticker and is inherited from the class Sticker
  *
@@ -13,7 +14,7 @@ public class CupSticker extends Sticker{
      * Method responsible for returning the identity of the object "selecao" and "posicao" 
      */
     public String toString() {
-        return super.toString() + " selecao " + this.selecao + " posicao " + this.posicao;
+        return super.toString() + ";selecao " + this.selecao + ";posicao " + this.posicao;
     }
 
     public String getSelecao() {
