@@ -4,8 +4,16 @@ import javax.swing.*;
 
 import java.awt.*;
 
+/**
+ * Class responsible for having a standard setting to be applied in the view's screen. It is going to implement the interface Config. 
+ *
+ */
 public class Componets implements Config{
 
+	/**
+	 * Static method responsible for setting the constants for a card
+	 * @return card
+	 */
     protected static JPanel card() {
 
         JPanel card = new JPanel();
@@ -17,6 +25,11 @@ public class Componets implements Config{
         return card;
     }
 
+    /**
+     * Static method responsible for setting the constants of a label
+     * @param text
+     * @return label
+     */
     protected static JLabel label (String text) {
         JLabel label = new JLabel(); 
         label.setFont(Config.FONT);
@@ -25,6 +38,12 @@ public class Componets implements Config{
         return label;
     }
 
+    /**
+     * Static method responsible for setting the constants of a button
+     * @param text
+     * @param background
+     * @return button
+     */
     protected static JButton makeButton(String text, Color background) {
 
         JButton button = new JButton(text);
