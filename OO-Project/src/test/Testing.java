@@ -30,7 +30,6 @@ class Testing {
         stickers.add(new StickerChild("Sticker1", "www.sticker1.com"));
         stickers.add(new StickerChild("Sticker2", "www.sticker2.com"));
         stickers.add(new StickerChild("Sticker3", "www.sticker3.com"));
-        // cria o album
         Album album = new Album("Meu album", "album1", stickers);
         stickers.get(0).setQuant(1);
         stickers.get(1).setQuant(0);
@@ -62,6 +61,27 @@ class Testing {
         album.setStickers(stickers);
         ArrayList<Sticker> missingStickers = album.getMissingStickers();
         assertEquals(stickers, missingStickers);
+    }
+	
+		@Test
+	void testFindStickers() {
+		class StickerChild extends Sticker{
+			public StickerChild(String name, String UrlImage) {
+				super(name, UrlImage);
+			}
+		}
+        ArrayList<Sticker> stickers = new ArrayList<Sticker>();
+        stickers.add(new StickerChild("sticker1", "url1"));
+        stickers.add(new StickerChild("sticker2", "url2"));
+        stickers.add(new StickerChild("sticker3", "url3"));
+
+        Album album = new Album("Álbum de Teste", "AT", stickers);
+
+        ArrayList<Sticker> result = album.findStickers("sticker2");
+
+        assertEquals(1, result.size());
+        assertEquals("sticker2", result.get(0).getName());
+        
     }
     }
 
