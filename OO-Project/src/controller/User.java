@@ -15,15 +15,11 @@ public class User {
     public User(){
         this.albuns = new ArrayList<>();
     }
-<<<<<<< HEAD
 
-=======
-    
     /**
      * Method that is responsible for add an album to the user
      * @param album
      */
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
     public void addAlbum(Album album) {
         albuns.add(album);
     }
@@ -40,7 +36,6 @@ public class User {
         albuns.remove(album);
     }
     
-<<<<<<< HEAD
     public Album createAlbum (String name){
 
         Album album = new Album();
@@ -50,8 +45,6 @@ public class User {
     }
 
     
-    public void listAll() {
-=======
     /**
      * Method responsible for searching for an album given its name so that the album can be find. 
      * The searching will be based on the data of the holder according to its album.
@@ -61,19 +54,18 @@ public class User {
      * @return album
      * @return null
      */
-    public Album findAlbum (String name){
-        for (Album album : holder) {
-            if(album.getName().equals(name))
-                return album;
-        }
-        return null;
-    }
+    //public Album findAlbum (String name){
+    //    for (Album album : holder) {
+    //        if(album.getName().equals(name))
+    //            return album;
+    //    }
+    //    return null;
+    //}
     /**
      * Method responsible for listing all the albums that already exists.
      * It is going to print their names on the screen. 
      */
    public void listAll() {
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
        albuns.forEach((album) -> System.out.println(album.getName()));
    }
 }

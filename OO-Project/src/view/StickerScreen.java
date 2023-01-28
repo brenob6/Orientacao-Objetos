@@ -27,12 +27,12 @@ import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-/**
- * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the sticker screen 
- * so that the user can interact with the album through the actions provided by the cards, buttons and its events.
- *
- */
-public class StickerScreen extends JFrame implements Config{
+    /**
+     * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the sticker screen 
+     * so that the user can interact with the album through the actions provided by the cards, buttons and its events.
+     *
+     */
+public class StickerScreen extends JFrame implements Config {
 
     private JPanel topMenuPane = new JPanel();
     private JPanel listStickesPanel = new JPanel();
@@ -46,10 +46,11 @@ public class StickerScreen extends JFrame implements Config{
     private JTabbedPane tabPane = new JTabbedPane();
 
     private Album album;
-/**
- * Constructor responsible for instantiate the class StickerScreen
- * @param album
- */
+
+    /**
+     * Constructor responsible for instantiate the class StickerScreen
+     * @param album
+     */
     public StickerScreen(Album album) {
         this.album = album;
         this.setTitle("Pseudo Album");
@@ -66,7 +67,7 @@ public class StickerScreen extends JFrame implements Config{
 
         this.add(tabPane);
 
-        topMenuPane = titlePanel(album);
+        topMenuPane = titlePanel(album.getName());
 
         tabPane.add("TODAS", listStickesScrollPanel);
         tabPane.add("FALTANTES", listMissingScrollPanel);
@@ -92,26 +93,22 @@ public class StickerScreen extends JFrame implements Config{
             }
         });
 
-        //loadStickerCards(album);
-        load(album.getStickers(), listStickesPanel);
+        loadStickerCards(album);
+        //load(album.getStickers(), listStickesPanel);
 
         this.add(topMenuPane, BorderLayout.NORTH);
         this.add(tabPane, BorderLayout.CENTER);
 
         this.setVisible(true);
     }
-<<<<<<< HEAD
 
-    private JPanel titlePanel(Album album) {
-=======
-/**
- * Method responsible for creating a title panel according to its title and also 
- * its components and their following actions  
- * @param title
- * @return topMenuPane
- */
+    /**
+     * Method responsible for creating a title panel according to its title and also 
+     * its components and their following actions  
+     * @param title
+     * @return topMenuPane
+     */
     private JPanel titlePanel(String title) {
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
         topMenuPane.setSize(800, 100);
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
@@ -176,7 +173,6 @@ public class StickerScreen extends JFrame implements Config{
         return topMenuPane;
         //this.add(topMenuPane, BorderLayout.NORTH);
     }
-<<<<<<< HEAD
 
     private void load (ArrayList<Sticker> list, JPanel panel) {
         panel.removeAll();
@@ -190,13 +186,11 @@ public class StickerScreen extends JFrame implements Config{
 
     }
 
-=======
-/**
- * Method responsible for loading and updating the data that is contained 
- * in the list of stickers, missing stickers and repeated stickers  
- * @param album
- */
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
+    /**
+     * Method responsible for loading and updating the data that is contained 
+     * in the list of stickers, missing stickers and repeated stickers  
+     * @param album
+     */
     private void loadStickerCards(Album album) {
         listStickesPanel.removeAll();
         listRepeatedPanel.removeAll();
@@ -222,11 +216,11 @@ public class StickerScreen extends JFrame implements Config{
         listRepeatedPanel.repaint();
         
     }
-/**
- * Method responsible for creating a sticker card 
- * @param sticker
- * @return
- */
+    /**
+     * Method responsible for creating a sticker card 
+     * @param sticker
+     * @return
+     */
     public JPanel makeStickerCard(Sticker sticker) {
 
         JPanel card = Componets.card();
@@ -285,11 +279,11 @@ public class StickerScreen extends JFrame implements Config{
 
         return card;
     }
-/**
- * Method responsible for creating a panel that gives the information about the sticker 
- * @param sticker
- * @return panel
- */
+    /**
+     * Method responsible for creating a panel that gives the information about the sticker 
+     * @param sticker
+     * @return panel
+     */
     private JPanel makeInfoPanel(Sticker sticker) {
         JPanel panel = new JPanel();
         JLabel img = new JLabel(); 
@@ -298,11 +292,11 @@ public class StickerScreen extends JFrame implements Config{
         panel.add(img);
         return panel;
     }
-/**
- * Method responsible for generating an organized and visible text in more than one line that contains the sticker's information  
- * @param sticker
- * @return text
- */
+    /**
+     * Method responsible for generating an organized and visible text in more than one line that contains the sticker's information  
+     * @param sticker
+     * @return text
+     */
     private String makeInfoText(Sticker sticker) {
         String[] infos = sticker.toString().split(";");
         String text = "<html>";

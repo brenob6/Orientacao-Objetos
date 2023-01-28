@@ -30,7 +30,6 @@ public class Album {
         });
         return repeated;
     }
-<<<<<<< HEAD
 
 
     public ArrayList<Sticker> findStickers (String name) {
@@ -46,12 +45,10 @@ public class Album {
         return finded;
     }
     
-=======
     /**
      * Method responsible for searching and listing missing stickers in an album
      * @return missing
      */
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
     public ArrayList<Sticker> getMissingStickers() {
         ArrayList<Sticker> missing = new ArrayList<Sticker>();
         stickers.forEach((sticker) -> {

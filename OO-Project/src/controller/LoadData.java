@@ -33,10 +33,11 @@ public class LoadData {
     };
 
     private static String DC = "Heróis DC";
-/**
- * Method responsible for creating a list of specific types of albums with its following stickers 
- * @return albumList
- */
+
+    /**
+     * Method responsible for creating a list of specific types of albums with its following stickers 
+     * @return albumList
+     */
     public static ArrayList<Album> getAlbums() {
 
         ArrayList<Album> albumList = new ArrayList<>();
@@ -54,16 +55,12 @@ public class LoadData {
         return albumList;
     }
 
-<<<<<<< HEAD
-    public static ArrayList<Sticker> makeStickers(String n) {
-=======
     /**
      * Method responsible for creating stickers with its informations
      * @param n
      * @return stickerList
      */
-    private static ArrayList<Sticker> makeStickers(String n) {
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
+    public static ArrayList<Sticker> makeStickers(String n) {
         
         ArrayList<Sticker> stickerList = new ArrayList<>();
 

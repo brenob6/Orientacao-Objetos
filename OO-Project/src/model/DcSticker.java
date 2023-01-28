@@ -10,14 +10,10 @@ public class DcSticker extends Sticker{
 
     
     public DcSticker() {
-<<<<<<< HEAD
         this.code = Code.Dc;
         // TODO Auto-generated constructor stub
     }
-=======
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
 
-    }
 /**
  * Constructor responsible for instantiate the class DCSticker
  * @param name
@@ -27,11 +23,8 @@ public class DcSticker extends Sticker{
  */
     public DcSticker(String name, String UrlImage, String movie, String alias) {
         super(name, UrlImage);
-<<<<<<< HEAD
         // TODO Auto-generated constructor stub
         this.code = Code.Dc;
-=======
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
         this.movie = movie;
         this.alias = alias;
     }

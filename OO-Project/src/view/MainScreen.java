@@ -68,7 +68,8 @@ public class MainScreen extends JFrame implements Config {
             public void mouseClicked(MouseEvent e) {
                 showModalForm();
             }
-        });   button.setFont(Config.FONT);
+        });
+        //button.setFont(Config.FONT);
 
         titlePanel.setBackground(Config.COLOR_BLACK);
         titlePanel.add(label);
@@ -113,8 +114,6 @@ public class MainScreen extends JFrame implements Config {
 
     }
 
-<<<<<<< HEAD
-=======
     /**
      * Method responsible for generating an update in the album's list
      */
@@ -127,7 +126,6 @@ public class MainScreen extends JFrame implements Config {
      * Method responsible for creating an album card and its components 
      * @return card
      */
->>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
     public JPanel makeAlbumCard(Album album) {
 
         JPanel card = Componets.card();
