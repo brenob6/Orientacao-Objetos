@@ -1,5 +1,7 @@
 package view;
 
+import javax.swing.*;
+import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,6 +14,7 @@ import javax.swing.JTextField;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
+import java.awt.*;
 import model.Album;
 import model.CupSticker;
 import model.DcSticker;
@@ -89,7 +92,8 @@ public class StickerScreen extends JFrame implements Config {
                     load(album.getRepeatedStickers(), listRepeatedPanel);
                     break;
                 }
-                loadStickerCards(album);
+                //loadStickerCards(album);
+                load(album.getStickers(), listStickesPanel);
             }
         });
 
@@ -119,8 +123,9 @@ public class StickerScreen extends JFrame implements Config {
         JButton addButton = Componets.makeButton("+", COLOR_BLACK);
 
         JTextField searchField = new JTextField();
-        searchField.setPreferredSize(new Dimension(80, 35));
+        searchField.setPreferredSize(new Dimension(200, 35));
         searchField.setFont(FONT);
+        searchField.setBorder(BorderFactory.createEmptyBorder());
 
         topMenuPane.add(label);
         topMenuPane.add(addButton);
@@ -139,39 +144,94 @@ public class StickerScreen extends JFrame implements Config {
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                JTextField nameField = new JTextField();
+                showModalForm(album);
+                //JTextField nameField = new JTextField();
 
-                JPanel panel = new JPanel(new GridLayout(0, 1));
-                panel.add(new JLabel("Nome:"));
-                panel.add(nameField);
+                //JPanel panel = new JPanel(new GridLayout(0, 1));
+                //panel.add(new JLabel("Nome:"));
+                //panel.add(nameField);
 
-                int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Figura",
-                    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-                if (result == JOptionPane.OK_OPTION) {
+                //int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Figura",
+                //    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+                //if (result == JOptionPane.OK_OPTION) {
 
-                    Sticker sticker = null;
-                    switch (album.getName()) {
-                        case "Heróis DC" :
-                        sticker = new DcSticker();
+                //    Sticker sticker = null;
+                //    switch (album.getName()) {
+                //        case "Heróis DC" :
+                //        sticker = new DcSticker();
 
-                        break;
-                        case "Copa do Mundo":
-                        sticker = new CupSticker();
-                        break;
-                        
-                        default:
-                        sticker = new DcSticker();
-                    }
+                //        break;
+                //        case "Copa do Mundo":
+                //        sticker = new CupSticker();
+                //        break;
+                //        
+                //        default:
+                //        sticker = new DcSticker();
+                //    }
             
-                    sticker.setName(nameField.getText());
-                    album.getStickers().add(sticker);
-                    loadStickerCards(album);
-                }
+                //    sticker.setName(nameField.getText());
+                //    album.getStickers().add(sticker);
+                //    loadStickerCards(album);
+                //}
 
             }
         });
         return topMenuPane;
         //this.add(topMenuPane, BorderLayout.NORTH);
+    }
+
+    private void showModalForm (Album album) {
+
+        JTextField nameField = new JTextField();
+        JTextField field1 = new JTextField();
+        JTextField field2 = new JTextField();
+        
+        JPanel panel = new JPanel(new GridLayout(0, 1));
+        panel.add(new JLabel("Nome:"));
+        panel.add(nameField);
+
+        switch (album.getName()) {
+            case "Heróis DC":
+            panel.add(new JLabel("Codinome"));
+            panel.add(field1);
+
+            panel.add(new JLabel("Filme"));
+            panel.add(field2);
+            break;
+
+            case "Copa do Mundo":
+            panel.add(new JLabel("Seleção"));
+            panel.add(field1);
+
+            panel.add(new JLabel("Posição"));
+            panel.add(field2);
+            break;
+        }
+
+        int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Figura",
+            JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+        if (result == JOptionPane.OK_OPTION) {
+
+            Sticker sticker = null;
+            switch (album.getName()) {
+                case "Heróis DC" :
+                sticker = new DcSticker(
+                    nameField.getText(),
+                    null,
+                    field2.getText(),
+                    field1.getText()
+                );
+
+                break;
+                case "Copa do Mundo":
+                sticker = new CupSticker();
+                break;
+            }
+    
+            album.getStickers().add(sticker);
+            loadStickerCards(album);
+        }
+
     }
 
     private void load (ArrayList<Sticker> list, JPanel panel) {
@@ -226,6 +286,7 @@ public class StickerScreen extends JFrame implements Config {
         JPanel card = Componets.card();
 
         JLabel nameLabel = Componets.label(sticker.getName());
+        nameLabel.setPreferredSize(new Dimension(300, 40));
         JLabel countLabel = Componets.label(String.valueOf(sticker.getQuant()));
 
         JButton addButton = Componets.makeButton("+", COLOR_BLACK);

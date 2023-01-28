@@ -3,6 +3,7 @@ package view;
 import javax.swing.*;
 
 import java.awt.*;
+import java.awt.event.*;
 
 /**
  * Class responsible for having a standard setting to be applied in the view's screen. It is going to implement the interface Config. 
@@ -52,6 +53,17 @@ public class Componets implements Config{
         button.setForeground(COLOR_WHITE);
         button.setPreferredSize(buttonDimension);
         button.setFont(FONT);
+        button.addMouseListener(new MouseAdapter(){
+
+            public void mouseEntered (MouseEvent e) {
+                button.setBackground(background.darker());;
+            }
+
+            public void mouseExited (MouseEvent e) {
+                button.setBackground(background);
+            }
+
+        });
 
         return button;
     }
