@@ -8,8 +8,10 @@ import controller.User;
 import model.Album;
 
 /**
- * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the main screen 
- * so that the user can interact with the view through the actions provided by the panels, components and its events
+ * Class responsible for implementing the interface Config, 
+ * inherits the JFRame class and makes possible the manufacture 
+ * of the main screen so that the user can interact with the view 
+ * through the actions provided by the panels, components and its events
  *
  */
 
@@ -21,9 +23,9 @@ public class MainScreen extends JFrame {
 
     private User controller = new User();
     private JTabbedPane tabPane = new JTabbedPane();
-    /**
-     * Constructor responsible for instantiate the class MainScreen
-     */
+/**
+* Constructor responsible for instantiate the class MainScreen
+* */
     public MainScreen() {
         this.setTitle(Config.TITLENAME);
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
@@ -39,9 +41,10 @@ public class MainScreen extends JFrame {
         this.setVisible(true);
     }
 
-    /**
-     * Method responsible for setting the components and its events of a panel so that it can be shown in the main screen
-     */
+/**
+* Method responsible for setting the components 
+* and its events of a panel so that it can be shown in the main screen
+*/
     private void titlePanel() {
         JLabel label = new JLabel();
         label.setText("Controle de Figurinhas");
@@ -64,10 +67,11 @@ public class MainScreen extends JFrame {
         this.add(titlePanel, BorderLayout.NORTH);
     }
 
-    /**
-     * Method responsible for making a modal panel and its components so that it will be possible to
-     * create a new album  giving it a name 
-     */
+/**
+* Method responsible for making a modal panel and 
+* its components so that it will be possible to
+* create a new album  giving it a name 
+*/
     private void showModalForm () {
         String[] items = {"Heróis DC", "Copa do Mundo"};
         JComboBox<String> combo = new JComboBox<>(items);
@@ -100,10 +104,10 @@ public class MainScreen extends JFrame {
 
     }
 
-    /**
-     * Method responsible for creating an album card and its components 
-     * @return card
-     */
+/**
+* Method responsible for creating an album card and its components 
+* @return card
+*/
     public JPanel makeAlbumCard(Album album) {
 
         JPanel card = Componets.card();
