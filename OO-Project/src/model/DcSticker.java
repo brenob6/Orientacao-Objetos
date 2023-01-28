@@ -11,7 +11,6 @@ public class DcSticker extends Sticker{
     
     public DcSticker() {
         this.code = Code.Dc;
-        // TODO Auto-generated constructor stub
     }
 
 /**
@@ -29,9 +28,9 @@ public class DcSticker extends Sticker{
         this.alias = alias;
     }
     
-    /**
-     * Method responsible for returning the identity of the object "movie" and "alias" 
-     */
+/**
+ * Method responsible for returning the identity of the object "movie" and "alias" 
+ */
     public String toString() {
         return super.toString() + ";movie: " + this.movie + ";alias" + this.alias;
     }
