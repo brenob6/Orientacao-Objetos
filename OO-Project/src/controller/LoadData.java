@@ -14,13 +14,42 @@ import model.Sticker;
 public class LoadData {
 
     // Dados figuras DC
-    final static private String[] movie = {"Cavaleiro das Trevas", "Flash Point", "Homem de Aço"};
-    final static private String[] alias = {"Batman", "Flash", "Superman"};
-    final static private String[] name = {"Bruce Wayne", "Barry Alen", "Kent Clark"};
+    final static private String[] movie = {
+        "Cavaleiro das Trevas",
+        "Flash Point",
+        "Homem de Aço",
+        "Mulher Maravilha",
+        "Liga da Justiça",
+        "A família do Batman",
+        "Piada Mortal"
+    };
+    final static private String[] alias = {
+        "Batman", 
+        "Flash", 
+        "Superman",
+        "Mulher Maravilha",
+        "Caçador de Marte",
+        "Asa Noturna",
+        "Coringa"
+    };
+    final static private String[] nameDc = {
+        "Bruce Wayne", 
+        "Barry Alen",
+        "Clark Kent",
+        "Princesa Diana",
+        "Ajax",
+        "Dick Grayson",
+        "Arthur Fleck"
+
+    };
     final static private String[] urlDC = {
         "https://upload.wikimedia.org/wikipedia/pt/8/8d/Batman_por_Jim_Lee.jpg",
         "https://upload.wikimedia.org/wikipedia/pt/a/a4/Barry_Allen_Flash.jpg",
-        "https://upload.wikimedia.org/wikipedia/pt/thumb/b/be/Super-Homem.jpg/250px-Super-Homem.jpg"
+        "https://upload.wikimedia.org/wikipedia/pt/thumb/b/be/Super-Homem.jpg/250px-Super-Homem.jpg",
+        "https://upload.wikimedia.org/wikipedia/pt/thumb/f/f6/Mulher-Maravilha.jpg/260px-Mulher-Maravilha.jpg",
+        "https://upload.wikimedia.org/wikipedia/pt/thumb/6/63/MartianManhunter.jpg/200px-MartianManhunter.jpg",
+        "https://upload.wikimedia.org/wikipedia/pt/thumb/9/9d/Asa_Noturna_-_Dick_Grayson.jpg/200px-Asa_Noturna_-_Dick_Grayson.jpg",
+        "https://upload.wikimedia.org/wikipedia/pt/thumb/1/1a/Joker_%28DC_Comics%29.jpg/250px-Joker_%28DC_Comics%29.jpg"
     };
     
     // Dados Figura Copa
@@ -65,9 +94,9 @@ public class LoadData {
         ArrayList<Sticker> stickerList = new ArrayList<>();
 
         if(n.equals(DC)){
-            for(int i = 0; i < selecao.length; i++) {
+            for(int i = 0; i < nameDc.length; i++) {
                 stickerList.add(new DcSticker(
-                    name[i], urlDC[i], movie[i], alias[i]));
+                    nameDc[i], urlDC[i], movie[i], alias[i]));
             }
         }
 
