@@ -7,6 +7,10 @@ import model.CupSticker;
 import model.DcSticker;
 import model.Sticker;
 
+/**
+ * Class responsible for simulating the database of both Cup and DC stickers that exists in an album
+ *
+ */
 public class LoadData {
 
     // Dados figuras DC
@@ -29,7 +33,10 @@ public class LoadData {
     };
 
     private static String DC = "Heróis DC";
-
+/**
+ * Method responsible for creating a list of specific types of albums with its following stickers 
+ * @return albumList
+ */
     public static ArrayList<Album> getAlbums() {
 
         ArrayList<Album> albumList = new ArrayList<>();
@@ -47,7 +54,16 @@ public class LoadData {
         return albumList;
     }
 
+<<<<<<< HEAD
     public static ArrayList<Sticker> makeStickers(String n) {
+=======
+    /**
+     * Method responsible for creating stickers with its informations
+     * @param n
+     * @return stickerList
+     */
+    private static ArrayList<Sticker> makeStickers(String n) {
+>>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
         
         ArrayList<Sticker> stickerList = new ArrayList<>();
 

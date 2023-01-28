@@ -1,14 +1,18 @@
 package model;
-
+/**
+ * Class responsible for simulating Cup sticker and is inherited from the class Sticker
+ *
+ */
 public class CupSticker extends Sticker{
 
     private String selecao;
     private String posicao;
     
 
-    @Override
+    /**
+     * Method responsible for returning the identity of the object "selecao" and "posicao" 
+     */
     public String toString() {
-        // TODO Auto-generated method stub
         return super.toString() + " selecao " + this.selecao + " posicao " + this.posicao;
     }
 
@@ -31,7 +35,13 @@ public class CupSticker extends Sticker{
         this.posicao = posicao;
     }
 
-
+/**
+ * Constructor responsible for instantiate the class CupSticker
+ * @param name
+ * @param UrlImage
+ * @param selecao
+ * @param posicao
+ */
     public CupSticker(String name, String UrlImage, String selecao, String posicao) {
         super(name, UrlImage );
         // TODO Auto-generated constructor stub

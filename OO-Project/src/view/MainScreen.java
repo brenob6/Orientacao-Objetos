@@ -21,6 +21,12 @@ import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
+/**
+ * Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the main screen 
+ * so that the user can interact with the view through the actions provided by the panels, components and its events
+ *
+ */
+
 public class MainScreen extends JFrame implements Config {
 
     private JPanel albunsListPanel = new JPanel();
@@ -29,7 +35,9 @@ public class MainScreen extends JFrame implements Config {
 
     private User controller = new User();
     private JTabbedPane tabPane = new JTabbedPane();
-    
+    /**
+     * Constructor responsible for instantiate the class MainScreen
+     */
     public MainScreen() {
         this.setTitle(TITLENAME);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
@@ -45,6 +53,9 @@ public class MainScreen extends JFrame implements Config {
         this.setVisible(true);
     }
 
+    /**
+     * Method responsible for setting the components and its events of a panel so that it can be shown in the main screen
+     */
     private void titlePanel() {
         JLabel label = new JLabel();
         label.setText("Controle de Figurinhas");
@@ -66,6 +77,10 @@ public class MainScreen extends JFrame implements Config {
         this.add(titlePanel, BorderLayout.NORTH);
     }
 
+    /**
+     * Method responsible for making a modal panel and its components so that it will be possible to
+     * create a new album  giving it a name 
+     */
     private void showModalForm () {
         String[] items = {"Heróis DC", "Copa do Mundo"};
         JComboBox<String> combo = new JComboBox<>(items);
@@ -98,6 +113,21 @@ public class MainScreen extends JFrame implements Config {
 
     }
 
+<<<<<<< HEAD
+=======
+    /**
+     * Method responsible for generating an update in the album's list
+     */
+    private void updateList () {
+        albunsListPanel.removeAll();
+        controller.getUserAlbuns().forEach(album -> albunsListPanel.add(makeAlbumCard(album)));
+    }
+
+    /**
+     * Method responsible for creating an album card and its components 
+     * @return card
+     */
+>>>>>>> 491a77c4f0666d34e731b154c893ba6d7993f396
     public JPanel makeAlbumCard(Album album) {
 
         JPanel card = Componets.card();
@@ -111,7 +141,7 @@ public class MainScreen extends JFrame implements Config {
         JButton editBtn = Componets.makeButton("e", COLOR_YELLOW);
 
         editBtn.addActionListener(new ActionListener() {
-            @Override
+        	
             public void actionPerformed(ActionEvent e) {
 
                 JTextField editField = new JTextField();
@@ -130,7 +160,6 @@ public class MainScreen extends JFrame implements Config {
         });
 
         deleteBtn.addActionListener(new ActionListener() {
-            @Override
             public void actionPerformed(ActionEvent e) {
                 albunsListPanel.remove(card);
                 controller.removeAlbum(album);

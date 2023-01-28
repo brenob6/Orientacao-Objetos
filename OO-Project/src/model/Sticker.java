@@ -5,6 +5,11 @@ import java.net.URL;
 
 import javax.swing.ImageIcon;
 
+/**
+ * Abstract class responsible for simulating a sticker.
+ * It is going to extend its attributes to DC and Cup stickers 
+ *
+ */
 public abstract class Sticker {
 
     public static enum Code {
@@ -27,6 +32,11 @@ public abstract class Sticker {
         return this.code;
     }
     
+    /**
+     * Constructor responsible for instantiate the class Sticker
+     * @param name
+     * @param UrlImage
+     */
     public Sticker(String name, String UrlImage) {
         this.name = name;
         this.urlImage = UrlImage;
@@ -56,19 +66,22 @@ public abstract class Sticker {
         this.urlImage = urlImage;
     }
 
-    @Override
+    /**
+     * Method responsible for returning the identity of the object "name" and "quantidade" 
+     */
     public String toString() {
-        // TODO Auto-generated method stub
         return "name: " + this.name +
         ";quantidade: " + this.quant;
     }
 
+    /**
+     * Method responsible for generating sticker's images having the image's urls 
+     */
     public ImageIcon getImage() {
         URL url = null; 
         try {
             url = new URL(urlImage);
         } catch (MalformedURLException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
             return null;
         }

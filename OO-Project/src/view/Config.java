@@ -4,6 +4,11 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Dimension;
 
+/**
+ * Interface responsible for having the signature of the setting's constants that will be implemented 
+ * to build the screens. 
+ *
+ */
 public interface Config {
     String TITLENAME = "Pseudo Album";
 
