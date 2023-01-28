@@ -12,8 +12,10 @@ import java.awt.event.KeyAdapter;
 
 import java.util.ArrayList;
 /**
-* Class responsible for implementing the interface Config, inherits the JFRame class and makes possible the manufacture of the sticker screen 
-* so that the user can interact with the album through the actions provided by the cards, buttons and its events.
+* Class responsible for implementing the interface Config, 
+inherits the JFRame class and makes possible the manufacture of the sticker screen 
+* so that the user can interact with the album through the actions provided by the cards, 
+buttons and its events.
 *
 */
 public class StickerScreen extends JFrame {
