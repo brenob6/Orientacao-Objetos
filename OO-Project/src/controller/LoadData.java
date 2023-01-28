@@ -8,7 +8,8 @@ import model.DcSticker;
 import model.Sticker;
 
 /**
- * Class responsible for simulating the database of both Cup and DC stickers that exists in an album
+ * Class responsible for simulating a database of both 
+ * Cup and DC stickers that exists in an album
  *
  */
 public class LoadData {
@@ -63,10 +64,11 @@ public class LoadData {
 
     private static String DC = "Heróis DC";
 
-    /**
-     * Method responsible for creating a list of specific types of albums with its following stickers 
-     * @return albumList
-     */
+/**
+ * Method responsible for creating a list of specific 
+ * types of albums with its following stickers 
+ * @return albumList
+ */
     public static ArrayList<Album> getAlbums() {
 
         ArrayList<Album> albumList = new ArrayList<>();
@@ -84,11 +86,11 @@ public class LoadData {
         return albumList;
     }
 
-    /**
-     * Method responsible for creating stickers with its informations
-     * @param n
-     * @return stickerList
-     */
+/**
+ * Method responsible for creating stickers with its informations
+ * @param n
+ * @return stickerList
+ */
     public static ArrayList<Sticker> makeStickers(String n) {
         
         ArrayList<Sticker> stickerList = new ArrayList<>();
