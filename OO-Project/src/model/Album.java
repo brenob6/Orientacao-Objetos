@@ -18,10 +18,10 @@ public class Album {
     public void setStickers(ArrayList<Sticker> stickers) {
         this.stickers = stickers;
     }
-    /**
-     * Method responsible for searching and listing repeated stickers in an album
-     * @return repeated
-     */
+/**
+ * Method responsible for searching and listing repeated stickers in an album
+ * @return repeated
+ */
     public ArrayList<Sticker> getRepeatedStickers(){
         ArrayList<Sticker> repeated = new ArrayList<Sticker>();
         stickers.forEach((sticker) -> {
@@ -31,24 +31,29 @@ public class Album {
         return repeated;
     }
 
-
+/**
+ * Method responsible for searching a given name in the array list 
+ * of album and returns the found album's name if it's in the list
+ * @param name
+ * @return found
+ */
     public ArrayList<Sticker> findStickers (String name) {
-        ArrayList<Sticker> finded = new ArrayList<>(); 
+        ArrayList<Sticker> found = new ArrayList<>(); 
         name = name.toUpperCase();
 
         for(Sticker sticker : stickers) {
             String a = sticker.getName().toUpperCase();
             if(a.contains(name.toUpperCase()))
-                finded.add(sticker);
+                found.add(sticker);
         }
         
-        return finded;
+        return found;
     }
     
-    /**
-     * Method responsible for searching and listing missing stickers in an album
-     * @return missing
-     */
+/**
+ * Method responsible for searching and listing missing stickers in an album
+ * @return missing
+ */
     public ArrayList<Sticker> getMissingStickers() {
         ArrayList<Sticker> missing = new ArrayList<Sticker>();
         stickers.forEach((sticker) -> {
