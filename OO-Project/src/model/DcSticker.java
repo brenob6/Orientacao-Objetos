@@ -1,25 +1,34 @@
 package model;
 
+/**
+ * Class responsible for simulating a DC sticker and is inherited from the class Sticker
+ */
 public class DcSticker extends Sticker{
 
     private String movie;
     private String alias;
 
+    
     public DcSticker() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+    }
+/**
+ * Constructor responsible for instantiate the class DCSticker
+ * @param name
+ * @param UrlImage
+ * @param movie
+ * @param alias
+ */
     public DcSticker(String name, String UrlImage, String movie, String alias) {
         super(name, UrlImage);
-        // TODO Auto-generated constructor stub
         this.movie = movie;
         this.alias = alias;
     }
     
-    @Override
+    /**
+     * Method responsible for returning the identity of the object "movie" and "alias" 
+     */
     public String toString() {
-        // TODO Auto-generated method stub
         return super.toString() + ";movie: " + this.movie + ";alias" + this.alias;
     }
 
