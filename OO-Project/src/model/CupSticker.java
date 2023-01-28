@@ -10,9 +10,9 @@ public class CupSticker extends Sticker{
     private String posicao;
     
 
-    /**
-     * Method responsible for returning the identity of the object "selecao" and "posicao" 
-     */
+/**
+ * Method responsible for returning the identity of the object "selecao" and "posicao" 
+ */
     public String toString() {
         return super.toString() + ";selecao " + this.selecao + ";posicao " + this.posicao;
     }
@@ -45,7 +45,6 @@ public class CupSticker extends Sticker{
  */
     public CupSticker(String name, String UrlImage, String selecao, String posicao) {
         super(name, UrlImage );
-        // TODO Auto-generated constructor stub
         this.selecao = selecao;
         this.posicao = posicao;
 
