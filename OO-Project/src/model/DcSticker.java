@@ -6,13 +6,14 @@ public class DcSticker extends Sticker{
     private String alias;
 
     public DcSticker() {
-        super();
+        this.code = Code.Dc;
         // TODO Auto-generated constructor stub
     }
 
     public DcSticker(String name, String UrlImage, String movie, String alias) {
         super(name, UrlImage);
         // TODO Auto-generated constructor stub
+        this.code = Code.Dc;
         this.movie = movie;
         this.alias = alias;
     }

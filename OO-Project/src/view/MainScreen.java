@@ -1,7 +1,5 @@
 package view;
 
-import javax.swing.BorderFactory;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -11,22 +9,17 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
 import javax.swing.JTextField;
-import javax.swing.ScrollPaneLayout;
 import javax.swing.BoxLayout;
 
 import controller.User;
 import model.Album;
-import java.awt.*;
+import java.awt.Color;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Container;
-
-import java.util.ArrayList;
 
 public class MainScreen extends JFrame implements Config {
 
@@ -40,8 +33,7 @@ public class MainScreen extends JFrame implements Config {
     public MainScreen() {
         this.setTitle(TITLENAME);
         this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
-        //this.setLayout(new BorderLayout());
-        this.setResizable(true);
+        this.setResizable(false);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         this.add(tabPane);
@@ -50,9 +42,6 @@ public class MainScreen extends JFrame implements Config {
         this.add(scrollPane);
         titlePanel(); 
         
-        //tabPane.add("Meus Albuns", albunsListPanel);
-        //tabPane.add("Meus Albuns", scrollPane);
-
         this.setVisible(true);
     }
 
@@ -62,12 +51,7 @@ public class MainScreen extends JFrame implements Config {
         label.setFont(Config.FONT);
         label.setForeground(Config.COLOR_WHITE);
 
-        JButton button = new JButton("+");
-        button.setBorder(BorderFactory.createEmptyBorder());
-        button.setBackground(Config.COLOR_BLACK);
-        button.setForeground(Config.COLOR_WHITE);
-        button.setPreferredSize(Config.buttonDimension);
-        button.setName("addAlbum");
+        JButton button = Componets.makeButton("+", COLOR_BLACK);
 
         button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -76,7 +60,6 @@ public class MainScreen extends JFrame implements Config {
         });   button.setFont(Config.FONT);
 
         titlePanel.setBackground(Config.COLOR_BLACK);
-        titlePanel.setBounds(0, 0, WIDTH, 50);
         titlePanel.add(label);
         titlePanel.add(button);
 
@@ -95,13 +78,15 @@ public class MainScreen extends JFrame implements Config {
 
         int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Album",
             JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
+
         if (result == JOptionPane.OK_OPTION) {
             String name = (String) combo.getSelectedItem(); 
             String alias = field.getText();
 
-            Album album = controller.findAlbum(name);
+            Album album = controller.createAlbum(name);
             album.setAlias(alias);
             controller.addAlbum(album);
+
             JPanel card = makeAlbumCard(album);
             card.setMaximumSize(cardDimension);
             card.setMinimumSize(cardDimension);
@@ -113,27 +98,18 @@ public class MainScreen extends JFrame implements Config {
 
     }
 
-    private void updateList () {
-        albunsListPanel.removeAll();
-        controller.getUserAlbuns().forEach(album -> albunsListPanel.add(makeAlbumCard(album)));
-    }
-
     public JPanel makeAlbumCard(Album album) {
-        //JPanel card = new JPanel();
-        //card.setPreferredSize(cardDimension);
-        //card.setSize(cardDimension);
-        //card.setBackground(COLOR_WHITE);
 
         JPanel card = Componets.card();
 
-        JLabel nameLabel = new JLabel(album.getName());
-        nameLabel.setFont(Config.FONT);
+        JLabel nameLabel = Componets.label(album.getName());
 
         JLabel aliasLabel = new JLabel(album.getAlias());
         aliasLabel.setFont(FONT);
 
         JButton deleteBtn = Componets.makeButton("X", COLOR_RED);
         JButton editBtn = Componets.makeButton("e", COLOR_YELLOW);
+
         editBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -152,6 +128,7 @@ public class MainScreen extends JFrame implements Config {
                 }
             }
         });
+
         deleteBtn.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -163,6 +140,13 @@ public class MainScreen extends JFrame implements Config {
         });
 
         card.addMouseListener(new MouseAdapter() {
+            public void mouseEntered (MouseEvent e) {
+                card.setBackground(COLOR_CREAM);
+            }
+
+            public void mouseExited (MouseEvent e) {
+                card.setBackground(COLOR_WHITE);
+            }
             public void mouseClicked(MouseEvent e) {
                 new StickerScreen(album);
             }

@@ -22,6 +22,7 @@ import java.awt.Dimension;
 import java.awt.BorderLayout;
 import java.awt.event.*;
 import java.awt.event.KeyAdapter;
+import java.util.ArrayList;
 import java.awt.event.InputMethodListener;
 import java.awt.event.InputMethodEvent;
 import java.awt.event.ActionListener;
@@ -58,7 +59,7 @@ public class StickerScreen extends JFrame implements Config{
 
         this.add(tabPane);
 
-        topMenuPane = titlePanel(this.album.getName());
+        topMenuPane = titlePanel(album);
 
         tabPane.add("TODAS", listStickesScrollPanel);
         tabPane.add("FALTANTES", listMissingScrollPanel);
@@ -66,14 +67,26 @@ public class StickerScreen extends JFrame implements Config{
 
         tabPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
-                listRepeatedPanel.removeAll();
-                listStickesPanel.removeAll();
-                listMissingPanel.removeAll();
+                switch (tabPane.getSelectedIndex()) {
+                    case 0:
+                    listRepeatedPanel.removeAll();
+                    load(album.getStickers(), listStickesPanel);
+                    break;
+                    case 1:
+                    listMissingPanel.removeAll();
+                    load(album.getMissingStickers(), listMissingPanel);
+                    break;
+                    case 2:
+                    listStickesPanel.removeAll();
+                    load(album.getRepeatedStickers(), listRepeatedPanel);
+                    break;
+                }
                 loadStickerCards(album);
             }
         });
 
-        loadStickerCards(album);
+        //loadStickerCards(album);
+        load(album.getStickers(), listStickesPanel);
 
         this.add(topMenuPane, BorderLayout.NORTH);
         this.add(tabPane, BorderLayout.CENTER);
@@ -81,18 +94,19 @@ public class StickerScreen extends JFrame implements Config{
         this.setVisible(true);
     }
 
-    private JPanel titlePanel(String title) {
+    private JPanel titlePanel(Album album) {
         topMenuPane.setSize(800, 100);
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
-        JLabel label = Componets.label(title);
+        JLabel label = Componets.label(album.getName());
         label.setForeground(COLOR_WHITE);
 
         JButton addButton = Componets.makeButton("+", COLOR_BLACK);
 
         JTextField searchField = new JTextField();
-        searchField.setPreferredSize(new Dimension(80, 40));
+        searchField.setPreferredSize(new Dimension(80, 35));
+        searchField.setFont(FONT);
 
         topMenuPane.add(label);
         topMenuPane.add(addButton);
@@ -102,9 +116,11 @@ public class StickerScreen extends JFrame implements Config{
             @Override
             public void keyReleased (KeyEvent e) {
                 tabPane.setSelectedComponent(listStickesScrollPanel);
+                ArrayList<Sticker> finded = album.findStickers(searchField.getText());
+                load(finded, listStickesPanel);
             }
 
-        });;
+        });
 
         addButton.addActionListener(new ActionListener() {
             @Override
@@ -142,6 +158,18 @@ public class StickerScreen extends JFrame implements Config{
         });
         return topMenuPane;
         //this.add(topMenuPane, BorderLayout.NORTH);
+    }
+
+    private void load (ArrayList<Sticker> list, JPanel panel) {
+        panel.removeAll();
+        
+        list.forEach(sticker -> {
+            panel.add(makeStickerCard(sticker));
+        });
+
+        panel.revalidate();
+        panel.repaint();
+
     }
 
     private void loadStickerCards(Album album) {

@@ -24,6 +24,20 @@ public class Album {
         });
         return repeated;
     }
+
+
+    public ArrayList<Sticker> findStickers (String name) {
+        ArrayList<Sticker> finded = new ArrayList<>(); 
+        name = name.toUpperCase();
+
+        for(Sticker sticker : stickers) {
+            String a = sticker.getName().toUpperCase();
+            if(a.contains(name.toUpperCase()))
+                finded.add(sticker);
+        }
+        
+        return finded;
+    }
     
     public ArrayList<Sticker> getMissingStickers() {
         ArrayList<Sticker> missing = new ArrayList<Sticker>();

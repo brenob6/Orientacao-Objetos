@@ -47,7 +47,7 @@ public class LoadData {
         return albumList;
     }
 
-    private static ArrayList<Sticker> makeStickers(String n) {
+    public static ArrayList<Sticker> makeStickers(String n) {
         
         ArrayList<Sticker> stickerList = new ArrayList<>();
 

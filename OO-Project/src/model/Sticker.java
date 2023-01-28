@@ -7,16 +7,28 @@ import javax.swing.ImageIcon;
 
 public abstract class Sticker {
 
-    private int quant;
+    public static enum Code {
+        Copa,
+        Dc
+    }
+
+    private int quant = 0;
     private String urlImage;
     private String name;
+    protected Code code;
     
     
-    public Sticker() {}
+    public Sticker() {
+        this.name = "";
+        this.urlImage = null;
+    }
+
+    public Code getCode () {
+        return this.code;
+    }
     
     public Sticker(String name, String UrlImage) {
         this.name = name;
-        this.quant = 0; 
         this.urlImage = UrlImage;
     }
 
@@ -52,13 +64,13 @@ public abstract class Sticker {
     }
 
     public ImageIcon getImage() {
-
         URL url = null; 
         try {
             url = new URL(urlImage);
         } catch (MalformedURLException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
+            return null;
         }
         
         return new ImageIcon(url);
