@@ -14,7 +14,6 @@ import model.Album;
  * through the actions provided by the panels, components and its events
  *
  */
-
 public class MainScreen extends JFrame {
 
     private JPanel albunsListPanel = new JPanel();
@@ -23,9 +22,10 @@ public class MainScreen extends JFrame {
 
     private User controller = new User();
     private JTabbedPane tabPane = new JTabbedPane();
-/**
-* Constructor responsible for instantiate the class MainScreen
-* */
+
+    /**
+    * Constructor responsible for instantiate the class MainScreen
+    * */
     public MainScreen() {
         this.setTitle(Config.TITLENAME);
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
@@ -41,10 +41,10 @@ public class MainScreen extends JFrame {
         this.setVisible(true);
     }
 
-/**
-* Method responsible for setting the components 
-* and its events of a panel so that it can be shown in the main screen
-*/
+    /**
+    * Method responsible for setting the components 
+    * and its events of a panel so that it can be shown in the main screen
+    */
     private void titlePanel() {
         JLabel label = new JLabel();
         label.setText("Controle de Figurinhas");
@@ -58,7 +58,6 @@ public class MainScreen extends JFrame {
                 showModalForm();
             }
         });
-        //button.setFont(Config.FONT);
 
         titlePanel.setBackground(Config.COLOR_BLACK);
         titlePanel.add(label);
@@ -67,11 +66,11 @@ public class MainScreen extends JFrame {
         this.add(titlePanel, BorderLayout.NORTH);
     }
 
-/**
-* Method responsible for making a modal panel and 
-* its components so that it will be possible to
-* create a new album  giving it a name 
-*/
+    /**
+    * Method responsible for making a modal panel and 
+    * its components so that it will be possible to
+    * create a new album  giving it a name 
+    */
     private void showModalForm () {
         String[] items = {"Heróis DC", "Copa do Mundo"};
         JComboBox<String> combo = new JComboBox<>(items);
@@ -104,15 +103,16 @@ public class MainScreen extends JFrame {
 
     }
 
-/**
-* Method responsible for creating an album card and its components 
-* @return card
-*/
+    /**
+    * Method responsible for creating an album card and its components 
+    * @return card
+    */
     public JPanel makeAlbumCard(Album album) {
 
         JPanel card = Componets.card();
 
         JLabel nameLabel = Componets.label(album.getName());
+        nameLabel.setPreferredSize(new Dimension(300, 40));
 
         JLabel aliasLabel = new JLabel(album.getAlias());
         aliasLabel.setFont(Config.FONT);

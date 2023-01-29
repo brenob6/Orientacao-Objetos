@@ -11,11 +11,12 @@ import java.awt.event.*;
 import java.awt.event.KeyAdapter;
 
 import java.util.ArrayList;
+
 /**
 * Class responsible for implementing the interface Config, 
-inherits the JFRame class and makes possible the manufacture of the sticker screen 
+* inherits the JFRame class and makes possible the manufacture of the sticker screen 
 * so that the user can interact with the album through the actions provided by the cards, 
-buttons and its events.
+* buttons and its events.
 *
 */
 public class StickerScreen extends JFrame {
@@ -33,13 +34,13 @@ public class StickerScreen extends JFrame {
 
     private Album album;
 
-/**
-* Constructor responsible for instantiate the class StickerScreen
-* @param album
-*/
+    /**
+    * Constructor responsible for instantiate the class StickerScreen
+    * @param album
+    */
     public StickerScreen(Album album) {
         this.album = album;
-        this.setTitle("Pseudo Album");
+        this.setTitle(Config.TITLENAME);
         this.setSize(Config.FRAME_WIDTH, Config.FRAME_HEIGHT);
         this.setResizable(false);
 
@@ -62,43 +63,22 @@ public class StickerScreen extends JFrame {
         tabPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
                 updateScreen();
-                //switch (tabPane.getSelectedIndex()) {
-                //    case 0:
-                //    listRepeatedPanel.removeAll();
-                //    //updatePanel(album.getStickers(), listStickesPanel);
-                //    updateScreen();
-                //    break;
-                //    case 1:
-                //    listMissingPanel.removeAll();
-                //    //updatePanel(album.getMissingStickers(), listMissingPanel);
-                //    updateScreen();
-                //    break;
-                //    case 2:
-                //    listStickesPanel.removeAll();
-                //    //updatePanel(album.getRepeatedStickers(), listRepeatedPanel);
-                //    updateScreen();
-                //    break;
-                //}
-                //loadStickerCards(album);
                 updatePanel(album.getStickers(), listStickesPanel);
             }
         });
 
-        //loadStickerCards(album);
-        //updatePanel(album.getStickers(), listStickesPanel);
-        
         this.add(topMenuPane, BorderLayout.NORTH);
         this.add(tabPane, BorderLayout.CENTER);
         updateScreen();
         this.setVisible(true);
     }
 
-/**
-* Method responsible for creating a title panel according to its title and also 
-* its components and their following actions  
-* @param title
-* @return topMenuPane
-*/
+    /**
+    * Method responsible for creating a title panel according to its
+    * title and also its components and their following actions  
+    * @param title
+    * @return topMenuPane
+    */
     private JPanel titlePanel(String title) {
         topMenuPane.setSize(800, 100);
         topMenuPane.setBackground(Config.COLOR_BLACK);
@@ -125,46 +105,15 @@ public class StickerScreen extends JFrame {
                 ArrayList<Sticker> finded = album.findStickers(searchField.getText());
                 updatePanel(finded, listStickesPanel);
             }
-
         });
 
         addButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 showModalForm(album);
-                //JTextField nameField = new JTextField();
-
-                //JPanel panel = new JPanel(new GridLayout(0, 1));
-                //panel.add(new JLabel("Nome:"));
-                //panel.add(nameField);
-
-                //int result = JOptionPane.showConfirmDialog(null, panel, "Adicionar Figura",
-                //    JOptionPane.OK_CANCEL_OPTION, JOptionPane.PLAIN_MESSAGE);
-                //if (result == JOptionPane.OK_OPTION) {
-
-                //    Sticker sticker = null;
-                //    switch (album.getName()) {
-                //        case "Heróis DC" :
-                //        sticker = new DcSticker();
-
-                //        break;
-                //        case "Copa do Mundo":
-                //        sticker = new CupSticker();
-                //        break;
-                //        
-                //        default:
-                //        sticker = new DcSticker();
-                //    }
-            
-                //    sticker.setName(nameField.getText());
-                //    album.getStickers().add(sticker);
-                //    loadStickerCards(album);
-                //}
-
             }
         });
         return topMenuPane;
-        //this.add(topMenuPane, BorderLayout.NORTH);
     }
 
     private void showModalForm (Album album) {
@@ -211,83 +160,26 @@ public class StickerScreen extends JFrame {
 
                 break;
                 case "Copa do Mundo":
-                sticker = new CupSticker();
+                sticker = new CupSticker(
+                    nameField.getText(),
+                    null,
+                    field1.getText(),
+                    field2.getText()
+                );
                 break;
             }
     
             album.getStickers().add(sticker);
             updateScreen();
-            //updatePanel(album.getStickers(), listStickesPanel);
-            //updatePanel(album.getMissingStickers(), listMissingPanel);
-            //loadStickerCards(album);
         }
 
     }
 
-    private void updateScreen () {
-        switch (tabPane.getSelectedIndex()) {
-            case 0:
-            updatePanel(album.getStickers(), listStickesPanel);
-            break;
-
-            case 1:
-            updatePanel(album.getMissingStickers(), listMissingPanel);
-            break;
-
-            case 2:
-            updatePanel(album.getRepeatedStickers(), listRepeatedPanel);
-            break;
-        }
-    }
-
-    private void updatePanel (ArrayList<Sticker> list, JPanel panel) {
-        panel.removeAll();
-        
-        list.forEach(sticker -> {
-            panel.add(makeStickerCard(sticker));
-        });
-
-        panel.revalidate();
-        panel.repaint();
-
-    }
-
-/**
-* Method responsible for loading and updating the data that is contained 
-* in the list of stickers, missing stickers and repeated stickers  
-* @param album
-*/
-    private void loadStickerCards(Album album) {
-        listStickesPanel.removeAll();
-        listRepeatedPanel.removeAll();
-        listMissingPanel.removeAll();
-
-        album.getStickers().forEach(sticker -> {
-            listStickesPanel.add(makeStickerCard(sticker));
-        });
-
-        album.getRepeatedStickers().forEach(sticker -> {
-            listRepeatedPanel.add(makeStickerCard(sticker));
-        });
-
-        album.getMissingStickers().forEach(sticker -> {
-            listMissingPanel.add(makeStickerCard(sticker));
-        });
-
-        listStickesPanel.revalidate();
-        listStickesPanel.repaint();
-        listMissingPanel.revalidate();
-        listMissingPanel.repaint();
-        listRepeatedPanel.revalidate();
-        listRepeatedPanel.repaint();
-        
-    }
-
-/**
-* Method responsible for creating a sticker card 
-* @param sticker
-* @return
-*/
+    /**
+    * Method responsible for creating a sticker card 
+    * @param sticker
+    * @return
+    */
     public JPanel makeStickerCard(Sticker sticker) {
 
         JPanel card = Componets.card();
@@ -341,8 +233,6 @@ public class StickerScreen extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 album.getStickers().remove(sticker);
-                //updatePanel(album.getStickers(),  
-                //loadStickerCards(album);
                 updateScreen();
             }
         });
@@ -350,11 +240,39 @@ public class StickerScreen extends JFrame {
         return card;
     }
 
-/**
- * Method responsible for creating a panel that gives the information about the sticker 
- * @param sticker
- * @return panel
- */
+    private void updateScreen () {
+        switch (tabPane.getSelectedIndex()) {
+            case 0:
+            updatePanel(album.getStickers(), listStickesPanel);
+            break;
+
+            case 1:
+            updatePanel(album.getMissingStickers(), listMissingPanel);
+            break;
+
+            case 2:
+            updatePanel(album.getRepeatedStickers(), listRepeatedPanel);
+            break;
+        }
+    }
+
+    private void updatePanel (ArrayList<Sticker> list, JPanel panel) {
+        panel.removeAll();
+        
+        list.forEach(sticker -> {
+            panel.add(makeStickerCard(sticker));
+        });
+
+        panel.revalidate();
+        panel.repaint();
+
+    }
+
+    /**
+     * Method responsible for creating a panel that gives the information about the sticker 
+     * @param sticker
+     * @return panel
+     */
     private JPanel makeInfoPanel(Sticker sticker) {
         JPanel panel = new JPanel();
         JLabel img = new JLabel(); 
@@ -364,11 +282,12 @@ public class StickerScreen extends JFrame {
         return panel;
     }
 
-/**
- * Method responsible for generating an organized and visible text in more than one line that contains the sticker's information  
- * @param sticker
- * @return text
- */
+    /**
+     * Method responsible for generating an organized and visible
+     * text in more than one line that contains the sticker's information  
+     * @param sticker
+     * @return text
+     */
     private String makeInfoText(Sticker sticker) {
         String[] infos = sticker.toString().split(";");
         String text = "<html>";

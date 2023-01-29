@@ -12,34 +12,23 @@ import javax.swing.ImageIcon;
  */
 public abstract class Sticker {
 
-    public static enum Code {
-        Copa,
-        Dc
-    }
-
     private int quant = 0;
     private String urlImage;
     private String name;
-    protected Code code;
     
-    
-    public Sticker() {
-        this.name = "";
-        this.urlImage = null;
-    }
-
-    public Code getCode () {
-        return this.code;
-    }
-    
-/**
- * Constructor responsible for instantiate the class Sticker
- * @param name
- * @param UrlImage
- */
+    /**
+     * Constructor responsible for instantiate the class Sticker
+     * @param name
+     * @param UrlImage
+     */
     public Sticker(String name, String UrlImage) {
         this.name = name;
         this.urlImage = UrlImage;
+    }
+
+    public Sticker() {
+        this.name = "";
+        this.urlImage = null;
     }
 
     public String getName() {
@@ -66,17 +55,9 @@ public abstract class Sticker {
         this.urlImage = urlImage;
     }
 
-/**
- * Method responsible for returning the identity of the object "name" and "quantidade" 
- */
-    public String toString() {
-        return "name: " + this.name +
-        ";quantidade: " + this.quant;
-    }
-
-/**
- * Method responsible for generating sticker's images having the image's urls 
- */
+    /**
+     * Method responsible for generating sticker's images having the image's urls 
+     */
     public ImageIcon getImage() {
         URL url = null; 
         try {
@@ -87,6 +68,14 @@ public abstract class Sticker {
         }
         
         return new ImageIcon(url);
+    }
+
+    /**
+     * Method responsible for returning the identity of the object "name" and "quantidade" 
+     */
+    public String toString() {
+        return "name: " + this.name +
+        ";quantidade: " + this.quant;
     }
 
 }

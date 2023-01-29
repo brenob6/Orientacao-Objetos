@@ -6,15 +6,16 @@ import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Class responsible for having a standard setting to be applied in the view's screen. It is going to implement the interface Config. 
+ * Class responsible for having a standard setting to be applied in the view's screen.
+ * It is going to implement the interface Config. 
  *
  */
 public class Componets {
 
-/**
- * Static method responsible for setting the aconstants for a card
- * @return card
- */
+    /**
+     * Static method responsible for setting the aconstants for a card
+     * @return card
+     */
     protected static JPanel card() {
 
         JPanel card = new JPanel();
@@ -26,11 +27,11 @@ public class Componets {
         return card;
     }
 
-/**
- * Static method responsible for setting the constants of a label
- * @param text
- * @return label
- */
+    /**
+     * Static method responsible for setting the constants of a label
+     * @param text
+     * @return label
+     */
     protected static JLabel label (String text) {
         JLabel label = new JLabel(); 
         label.setFont(Config.FONT);
@@ -39,12 +40,12 @@ public class Componets {
         return label;
     }
 
-/**
-* Static method responsible for setting the constants of a button
-* @param text
-* @param background
-* @return button
-*/
+    /**
+    * Static method responsible for setting the constants of a button
+    * @param text
+    * @param background
+    * @return button
+    */
     protected static JButton makeButton(String text, Color background) {
 
         JButton button = new JButton(text);

@@ -13,9 +13,9 @@ import org.junit.runners.JUnit4;
 
 import model.Album;
 import model.Sticker;
-import org . junit . jupiter . api . Test ;
+import org.junit.jupiter.api.Test ;
 
-import org . junit . jupiter . api . Test ;
+import org.junit.jupiter.api.Test ;
 
 class Testing {
 
