@@ -8,11 +8,11 @@ import model.Album;
  * that has an album and is a holder of it 
  *
  */
-public class User {
+public class ControllerAlbum {
 
     private ArrayList<Album> albuns; 
 
-    public User(){
+    public ControllerAlbum(){
         this.albuns = new ArrayList<>();
     }
 

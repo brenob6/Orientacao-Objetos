@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
-import controller.User;
+import controller.ControllerAlbum;
 import model.Album;
 
 /**
@@ -20,7 +20,7 @@ public class MainScreen extends JFrame {
     private JPanel titlePanel = new JPanel();
     private JScrollPane scrollPane = new JScrollPane();
 
-    private User controller = new User();
+    private ControllerAlbum controller = new ControllerAlbum();
     private JTabbedPane tabPane = new JTabbedPane();
 
     /**
@@ -51,7 +51,7 @@ public class MainScreen extends JFrame {
         label.setFont(Config.FONT);
         label.setForeground(Config.COLOR_WHITE);
 
-        JButton button = Componets.makeButton("+", Config.COLOR_BLACK);
+        JButton button = Piece.button("+", Config.COLOR_BLACK);
 
         button.addMouseListener(new MouseAdapter() {
             public void mouseClicked(MouseEvent e) {
@@ -109,16 +109,16 @@ public class MainScreen extends JFrame {
     */
     public JPanel makeAlbumCard(Album album) {
 
-        JPanel card = Componets.card();
+        JPanel card = Piece.card();
 
-        JLabel nameLabel = Componets.label(album.getName());
+        JLabel nameLabel = Piece.label(album.getName());
         nameLabel.setPreferredSize(new Dimension(300, 40));
 
         JLabel aliasLabel = new JLabel(album.getAlias());
         aliasLabel.setFont(Config.FONT);
 
-        JButton deleteBtn = Componets.makeButton("X", Config.COLOR_RED);
-        JButton editBtn = Componets.makeButton("e", Config.COLOR_YELLOW);
+        JButton deleteBtn = Piece.button("X", Config.COLOR_RED);
+        JButton editBtn = Piece.button("e", Config.COLOR_YELLOW);
 
         editBtn.addActionListener(new ActionListener() {
         	

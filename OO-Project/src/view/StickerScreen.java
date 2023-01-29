@@ -86,10 +86,10 @@ public class StickerScreen extends JFrame {
         topMenuPane.setBackground(Config.COLOR_BLACK);
         topMenuPane.setVisible(true);
 
-        JLabel label = Componets.label(album.getName());
+        JLabel label = Piece.label(album.getName());
         label.setForeground(Config.COLOR_WHITE);
 
-        JButton addButton = Componets.makeButton("+", Config.COLOR_BLACK);
+        JButton addButton = Piece.button("+", Config.COLOR_BLACK);
 
         JTextField searchField = new JTextField();
         searchField.setPreferredSize(new Dimension(200, 35));
@@ -190,16 +190,16 @@ public class StickerScreen extends JFrame {
     */
     public JPanel makeStickerCard(Sticker sticker) {
 
-        JPanel card = Componets.card();
+        JPanel card = Piece.card();
 
-        JLabel nameLabel = Componets.label(sticker.getName());
+        JLabel nameLabel = Piece.label(sticker.getName());
         nameLabel.setPreferredSize(new Dimension(300, 40));
-        JLabel countLabel = Componets.label(String.valueOf(sticker.getQuant()));
+        JLabel countLabel = Piece.label(String.valueOf(sticker.getQuant()));
 
-        JButton addButton = Componets.makeButton("+", Config.COLOR_BLACK);
-        JButton removeButton = Componets.makeButton("-", Config.COLOR_BLACK);
-        JButton infoButton = Componets.makeButton("i", Config.COLOR_BLUE);
-        JButton deleteButton = Componets.makeButton("X", Config.COLOR_RED);
+        JButton addButton = Piece.button("+", Config.COLOR_BLACK);
+        JButton removeButton = Piece.button("-", Config.COLOR_BLACK);
+        JButton infoButton = Piece.button("i", Config.COLOR_BLUE);
+        JButton deleteButton = Piece.button("X", Config.COLOR_RED);
 
         card.add(nameLabel);
         card.add(addButton);

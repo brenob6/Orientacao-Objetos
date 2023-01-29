@@ -10,7 +10,7 @@ import java.awt.event.*;
  * It is going to implement the interface Config. 
  *
  */
-public class Componets {
+public class Piece {
 
     /**
      * Static method responsible for setting the aconstants for a card
@@ -19,7 +19,6 @@ public class Componets {
     protected static JPanel card() {
 
         JPanel card = new JPanel();
-        //card.setPreferredSize(Config.cardDimension);
         card.setMaximumSize(Config.cardDimension);
         card.setMinimumSize(Config.cardDimension);
         card.setBackground(Config.COLOR_WHITE);
@@ -46,7 +45,7 @@ public class Componets {
     * @param background
     * @return button
     */
-    protected static JButton makeButton(String text, Color background) {
+    protected static JButton button(String text, Color background) {
 
         JButton button = new JButton(text);
         button.setBorder(BorderFactory.createEmptyBorder());
