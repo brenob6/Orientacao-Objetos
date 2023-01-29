@@ -249,7 +249,7 @@ public class StickerScreen extends JFrame {
     }
 
     /**
-    * Method update the panel who the user are in.
+    * Method updates the panel that the user is in.
     * @return void
     */
     private void updateScreen () {
@@ -270,7 +270,7 @@ public class StickerScreen extends JFrame {
 
     /**
     * Method updates the data from the give panel.
-    * @param list list of sticker who will show in the panel
+    * @param list list of sticker that will show in the panel
     * @param panel the panel who will be update.
     * @return void
     */
