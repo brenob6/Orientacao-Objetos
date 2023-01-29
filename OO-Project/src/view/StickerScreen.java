@@ -36,6 +36,7 @@ public class StickerScreen extends JFrame {
 
     /**
     * Constructor responsible for instantiate the class StickerScreen
+    *
     * @param album
     */
     public StickerScreen(Album album) {
@@ -76,8 +77,9 @@ public class StickerScreen extends JFrame {
     /**
     * Method responsible for creating a title panel according to its
     * title and also its components and their following actions  
-    * @param title
-    * @return topMenuPane
+    *
+    * @param   title  the title of the header page.
+    * @return         a panel styled with title content 
     */
     private JPanel titlePanel(String title) {
         topMenuPane.setSize(800, 100);
@@ -115,7 +117,12 @@ public class StickerScreen extends JFrame {
         });
         return topMenuPane;
     }
-
+    
+    /**
+     * Show a JOptionPanel with a form to create a new sticker.
+     *
+     * @param album specify the form's shape.
+     */
     private void showModalForm (Album album) {
 
         JTextField nameField = new JTextField();
@@ -176,9 +183,10 @@ public class StickerScreen extends JFrame {
     }
 
     /**
-    * Method responsible for creating a sticker card 
-    * @param sticker
-    * @return
+    * Method responsible for creating a sticker card.
+    *
+    * @param sticker with the info for create the card.
+    * @return        jpanel in card's shape and it's own components
     */
     public JPanel makeStickerCard(Sticker sticker) {
 
@@ -240,6 +248,10 @@ public class StickerScreen extends JFrame {
         return card;
     }
 
+    /**
+    * Method update the panel who the user are in.
+    * @return void
+    */
     private void updateScreen () {
         switch (tabPane.getSelectedIndex()) {
             case 0:
@@ -256,6 +268,12 @@ public class StickerScreen extends JFrame {
         }
     }
 
+    /**
+    * Method updates the data from the give panel.
+    * @param list list of sticker who will show in the panel
+    * @param panel the panel who will be update.
+    * @return void
+    */
     private void updatePanel (ArrayList<Sticker> list, JPanel panel) {
         panel.removeAll();
         
